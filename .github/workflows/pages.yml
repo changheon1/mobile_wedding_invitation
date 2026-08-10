@@ -1,36 +1,41 @@
-name: Deploy site to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  # Allows manually triggering a deploy from the Actions tab
+  workflow_dispatch:
+
+# Grant just the permissions needed to publish to Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one deployment at a time, cancel any in-progress run
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v6
-        with:
-          enablement: true
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - name: Prepare site
-        run: |
-          mkdir -p public
-          cp index.html public/
-
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v5
+      - name: Upload site as artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          # Path to the folder containing index.html — "." means repo root
+          path: "."
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v5
+        id: deployment
+        uses: actions/deploy-pages@v4
