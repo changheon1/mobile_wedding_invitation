@@ -927,7 +927,6 @@ Novotel Melbourne Glen Waverley</div>
     <p class="rsvp-notice-copy" data-i18n="rsvpNoticeCopy">소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n예식이 지정좌석제로 진행되오니,\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
     <p class="rsvp-notice-em" data-i18n-html="rsvpNoticeMeta"><strong>신랑 Changheon Chung, 신부 Cheihyun Lee</strong><br>2026년 12월 21일 월요일 오후 5시 00분<br><strong>Novotel Melbourne Glen Waverley</strong></p>
     <button type="button" class="submit-btn rsvp-notice-confirm" id="confirmRsvpNotice" data-i18n="confirmRsvp">참석 여부 전달</button>
-    <button type="button" class="rsvp-notice-close-day" id="dismissRsvpNoticeToday" data-i18n="hideToday">오늘하루 보지않기</button>
   </div>
 </div>
 
@@ -1250,7 +1249,6 @@ Novotel Melbourne Glen Waverley</div>
   }
 
   function openRsvpNotice(){
-    if(isRsvpNoticeHiddenToday()) return;
     rsvpNoticeModal.classList.add('open');
     rsvpNoticeModal.setAttribute('aria-hidden', 'false');
     syncBodyLock();
@@ -1259,6 +1257,7 @@ Novotel Melbourne Glen Waverley</div>
   function closeRsvpNotice(){
     rsvpNoticeModal.classList.remove('open');
     rsvpNoticeModal.setAttribute('aria-hidden', 'true');
+    autoRsvpShown = false;
     syncBodyLock();
   }
 
@@ -1291,12 +1290,6 @@ Novotel Melbourne Glen Waverley</div>
   }
   if(confirmRsvpNoticeBtn){
     confirmRsvpNoticeBtn.addEventListener('click', openRsvpModal);
-  }
-  if(dismissRsvpNoticeTodayBtn){
-    dismissRsvpNoticeTodayBtn.addEventListener('click', ()=>{
-      localStorage.setItem('rsvpNoticeHiddenDate', todayStamp());
-      closeRsvpNotice();
-    });
   }
   if(closeRsvpModalBtn){
     closeRsvpModalBtn.addEventListener('click', closeRsvpModal);
