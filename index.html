@@ -1266,7 +1266,12 @@ Novotel Melbourne Glen Waverley</div>
   }
 
   if(openRsvpModalBtn){
-    openRsvpModalBtn.addEventListener('click', openRsvpNotice);
+    openRsvpModalBtn.addEventListener('click', ()=>{
+      // Always show the notice when manually clicked, ignoring "hide today"
+      rsvpNoticeModal.classList.add('open');
+      rsvpNoticeModal.setAttribute('aria-hidden', 'false');
+      syncBodyLock();
+    });
   }
   if(confirmRsvpNoticeBtn){
     confirmRsvpNoticeBtn.addEventListener('click', openRsvpModal);
