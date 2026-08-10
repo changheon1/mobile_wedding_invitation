@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://salondeletter.com/css/font/ChosunGu.css">
 <style>
   :root{
     --paper:#FAF6EF;
@@ -26,11 +27,12 @@
   body{
     background:#E7E1D3;
     color:var(--ink);
-    font-family:'Jost', sans-serif;
+    font-family:'ChosunGu', 'Jost', sans-serif;
     font-weight:300;
     display:flex;
     justify-content:center;
   }
+  body.modal-open{ overflow:hidden; }
   .card{
     width:100%;
     max-width:var(--max);
@@ -63,7 +65,7 @@
     border:none;
     background:transparent;
     color:var(--ink);
-    font-family:'Jost',sans-serif;
+    font-family:'ChosunGu',sans-serif;
     font-size:10px;
     letter-spacing:.12em;
     text-transform:uppercase;
@@ -74,7 +76,41 @@
     background:rgba(52,69,47,0.86);
     color:#fff;
   }
-  .serif{font-family:'Cormorant Garamond', serif;}
+  .serif{font-family:'ChosunGu', serif;}
+
+  .intro-overlay{
+    position:fixed;
+    inset:0;
+    z-index:140;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(20,20,20,.86);
+    color:#fff;
+    transition:opacity .7s ease;
+  }
+  .intro-overlay.hide{
+    opacity:0;
+    pointer-events:none;
+  }
+  .intro-inner{ text-align:center; padding:20px; }
+  .intro-kicker{
+    font-size:12px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    opacity:.85;
+    margin-bottom:14px;
+    animation:introRise 1.2s ease;
+  }
+  .intro-names{
+    font-size:38px;
+    line-height:1.2;
+    animation:introRise 1.2s ease;
+  }
+  @keyframes introRise{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
 
   /* ---------- shared section rhythm ---------- */
   section{
@@ -87,7 +123,7 @@
   }
   .divider svg{opacity:.55;}
   .eyebrow{
-    font-family:'Jost',sans-serif;
+    font-family:'ChosunGu',sans-serif;
     font-size:11px;
     letter-spacing:.32em;
     text-transform:uppercase;
@@ -96,7 +132,7 @@
     margin-bottom:14px;
   }
   .headline{
-    font-family:'Cormorant Garamond', serif;
+    font-family:'ChosunGu', serif;
     font-size:34px;
     font-weight:500;
     text-align:center;
@@ -125,7 +161,7 @@
   .cover-mark{
     margin-top:auto;
     padding-top:22vh;
-    font-family:'Cormorant Garamond', serif;
+    font-family:'ChosunGu', serif;
     font-style:italic;
     font-size:13px;
     letter-spacing:.24em;
@@ -133,7 +169,7 @@
     opacity:.85;
   }
   .cover-names{
-    font-family:'Cormorant Garamond', serif;
+    font-family:'ChosunGu', serif;
     font-size:52px;
     line-height:1.15;
     margin:18px 0 6px;
@@ -174,7 +210,7 @@
 
   /* ---------- greeting ---------- */
   .greeting p{
-    font-family:'Cormorant Garamond', serif;
+    font-family:'ChosunGu', serif;
     font-style:italic;
     font-size:19px;
     line-height:1.9;
@@ -184,11 +220,183 @@
   .greeting .names-sign{
     margin-top:28px;
     text-align:center;
-    font-family:'Jost', sans-serif;
+    font-family:'ChosunGu', sans-serif;
     font-size:12px;
     letter-spacing:.18em;
     text-transform:uppercase;
     color:var(--forest);
+  }
+
+  /* ---------- together time / story ---------- */
+  .together-time{
+    text-align:center;
+    margin-top:8px;
+  }
+  .together-time .label{
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--forest);
+    margin-bottom:10px;
+  }
+  .together-time .value{
+    font-size:20px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .story-list{
+    margin-top:24px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  .story-list::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    border-left:2px dotted #dcd7ca;
+    transform:translateX(-50%);
+  }
+  .story-row{
+    display:grid;
+    grid-template-columns:1fr 26px 1fr;
+    align-items:center;
+    min-height:150px;
+    position:relative;
+  }
+  .story-row.reverse .story-image{ grid-column:3; }
+  .story-row.reverse .story-copy{ grid-column:1; }
+  .story-row .dot{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:1;
+  }
+  .story-row .dot::before{
+    content:'';
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#355534;
+    border:2px solid var(--paper);
+  }
+  .story-image{
+    width:120px;
+    height:120px;
+    margin:0 auto;
+    background:var(--paper-soft);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 8px 16px rgba(0,0,0,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:12px;
+    color:#8b8574;
+    padding:8px;
+  }
+  .story-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .story-copy{
+    padding:6px 8px;
+    text-align:center;
+  }
+  .story-copy h3{
+    font-size:14px;
+    color:var(--ink);
+    margin-bottom:10px;
+  }
+  .story-copy p{
+    font-size:13px;
+    color:#5a5f4f;
+    line-height:1.55;
+  }
+  .story-copy p strong{
+    color:#b79556;
+    font-weight:500;
+  }
+
+  /* ---------- save the date ---------- */
+  .save-date-section{ padding-top:72px; }
+  .save-date-title{
+    text-align:center;
+    color:#6e7d66;
+    font-size:34px;
+    font-weight:400;
+    line-height:1.2;
+    margin-bottom:10px;
+  }
+  .save-date-info{
+    text-align:center;
+    font-size:18px;
+    color:#787f73;
+    line-height:1.6;
+    letter-spacing:.005em;
+    white-space:pre-line;
+  }
+  .save-date-photo{
+    margin:30px auto 0;
+    width:88%;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 10px 24px rgba(0,0,0,.10);
+    background:linear-gradient(150deg,#dcd5c4,#b6ad95);
+    aspect-ratio:4/5;
+  }
+  .save-date-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .save-date-calendar{
+    width:88%;
+    margin:26px auto 0;
+  }
+  .save-month{
+    text-align:center;
+    font-size:40px;
+    color:#7d8f76;
+    font-weight:400;
+    margin-bottom:16px;
+  }
+  .save-weekdays,
+  .save-days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px 4px;
+  }
+  .save-weekdays{
+    font-size:14px;
+    color:#6f7c67;
+    margin-bottom:8px;
+    text-align:center;
+    font-weight:500;
+  }
+  .save-days .day,
+  .save-days .blank{
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:15px;
+    color:#848b82;
+  }
+  .save-days .day.active{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    margin:0 auto;
+    background:#2f3137;
+    color:#fff;
   }
 
   /* ---------- countdown / stamp ---------- */
@@ -205,7 +413,7 @@
   }
   .stamp .unit{ text-align:center; flex:1; }
   .stamp .num{
-    font-family:'Cormorant Garamond', serif;
+    font-family:'ChosunGu', serif;
     font-size:30px;
     color:var(--forest-dark);
     font-weight:600;
@@ -240,7 +448,7 @@
     font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--rose); margin-bottom:4px;
   }
   .person .name{
-    font-family:'Cormorant Garamond', serif; font-size:22px; font-weight:500; margin-bottom:6px;
+    font-family:'ChosunGu', serif; font-size:22px; font-weight:500; margin-bottom:6px;
   }
   .person .note{ font-size:12px; color:#6d6a5c; line-height:1.6; }
   .contact-row{
@@ -277,7 +485,7 @@
     background:linear-gradient(160deg,#e4dcc7,#93a17f);
   }
   .lightbox .close{
-    position:absolute; top:26px; right:26px; color:#fff; font-size:24px; cursor:pointer; font-family:'Jost';
+    position:absolute; top:26px; right:26px; color:#fff; font-size:24px; cursor:pointer; font-family:'ChosunGu';
   }
 
   /* ---------- location ---------- */
@@ -287,7 +495,7 @@
   .address{
     text-align:center; margin-top:16px; font-size:13px; color:#5a5f4f;
   }
-  .address strong{ display:block; color:var(--ink); font-family:'Cormorant Garamond',serif; font-size:18px; margin-bottom:4px; font-weight:500;}
+  .address strong{ display:block; color:var(--ink); font-family:'ChosunGu',serif; font-size:18px; margin-bottom:4px; font-weight:500;}
   .nav-btns{
     display:flex; gap:8px; margin-top:18px;
   }
@@ -309,7 +517,7 @@
   }
   .field input[type=text], .field input[type=tel], .field textarea, .field select{
     width:100%; border:none; border-bottom:1px solid var(--line);
-    background:transparent; padding:8px 2px; font-family:'Jost'; font-size:14px; color:var(--ink);
+    background:transparent; padding:8px 2px; font-family:'ChosunGu'; font-size:14px; color:var(--ink);
   }
   .field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-bottom-color:var(--forest); }
   .field-note{ margin-top:6px; font-size:11px; color:#8b8574; }
@@ -329,6 +537,94 @@
     display:none; text-align:center; padding:20px; border:1px dashed var(--line); font-size:13px; color:var(--forest); margin-top:14px;
   }
   .rsvp-thanks.show{ display:block; }
+  .rsvp-launch{ width:100%; }
+  .rsvp-notice-modal{
+    position:fixed;
+    inset:0;
+    z-index:125;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(24,30,20,.58);
+    padding:20px;
+  }
+  .rsvp-notice-modal.open{ display:flex; }
+  .rsvp-notice{
+    width:100%;
+    max-width:390px;
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:22px 20px 18px;
+    position:relative;
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+  }
+  .rsvp-notice-title{
+    font-size:18px;
+    letter-spacing:.02em;
+    margin-bottom:12px;
+    color:var(--ink);
+  }
+  .rsvp-notice-copy{
+    font-size:13px;
+    color:#575d4d;
+    line-height:1.7;
+    white-space:pre-line;
+  }
+  .rsvp-notice-em{
+    margin-top:12px;
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.6;
+    white-space:pre-line;
+  }
+  .rsvp-notice-confirm{
+    width:100%;
+    margin-top:14px;
+  }
+  .rsvp-notice-close-day{
+    margin-top:10px;
+    width:100%;
+    border:none;
+    background:none;
+    color:#7b7b7b;
+    font-size:12px;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  .rsvp-modal{
+    position:fixed;
+    inset:0;
+    z-index:130;
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    background:rgba(24,30,20,.74);
+    padding:0;
+  }
+  .rsvp-modal.open{ display:flex; }
+  .rsvp-modal-panel{
+    width:100%;
+    max-width:var(--max);
+    min-height:100vh;
+    background:var(--paper);
+    overflow-y:auto;
+    position:relative;
+  }
+  .rsvp-modal-close{
+    position:sticky;
+    top:0;
+    margin-left:auto;
+    display:block;
+    width:46px;
+    height:46px;
+    border:none;
+    background:rgba(255,255,255,.82);
+    color:var(--ink);
+    font-size:30px;
+    line-height:1;
+    cursor:pointer;
+    z-index:2;
+  }
 
   /* ---------- gift / accounts ---------- */
   .accordion{ margin-top:8px; border-top:1px solid var(--line); }
@@ -356,7 +652,7 @@
   /* ---------- guestbook ---------- */
   .gb-form{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
   .gb-form input, .gb-form textarea{
-    border:1px solid var(--line); background:var(--white); padding:10px; font-family:'Jost'; font-size:13px;
+    border:1px solid var(--line); background:var(--white); padding:10px; font-family:'ChosunGu'; font-size:13px;
   }
   .gb-form button{
     align-self:flex-end; padding:9px 18px; background:var(--ink); color:#fff; border:none;
@@ -382,6 +678,12 @@
 </style>
 </head>
 <body>
+<div class="intro-overlay" id="introOverlay">
+  <div class="intro-inner">
+    <div class="intro-kicker" data-i18n="introMarried">We're getting married</div>
+    <div class="intro-names">Changheon &amp; Cheihyun</div>
+  </div>
+</div>
 <div class="card">
   <div class="lang-switcher">
     <div class="lang-box" role="group" aria-label="Language switcher">
@@ -422,27 +724,6 @@
     <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
   </div>
 
-  <!-- COUNTDOWN / DATE -->
-  <section class="reveal">
-    <div class="eyebrow" data-i18n="saveTheDate">Save The Date</div>
-    <h2 class="headline" data-i18n="dateHeadline">December 21, 2026 · 5:00 PM</h2>
-    <div class="stamp-wrap">
-      <div class="stamp" id="countdown">
-        <div class="unit"><div class="num" id="cd-days">00</div><div class="lab" data-i18n="days">Days</div></div>
-        <div class="unit"><div class="num" id="cd-hours">00</div><div class="lab" data-i18n="hours">Hours</div></div>
-        <div class="unit"><div class="num" id="cd-min">00</div><div class="lab" data-i18n="minutes">Min</div></div>
-        <div class="unit"><div class="num" id="cd-sec">00</div><div class="lab" data-i18n="seconds">Sec</div></div>
-      </div>
-    </div>
-    <div class="venue-line">
-      <strong>Novotel Melbourne Glen Waverley</strong>
-    </div>
-  </section>
-
-  <div class="divider reveal">
-    <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
-  </div>
-
   <!-- COUPLE -->
   <section class="reveal">
     <div class="eyebrow" data-i18n="meetCouple">Meet The Couple</div>
@@ -464,6 +745,80 @@
     <div class="contact-row">
       <a href="tel:+10000000000" data-i18n="callGroom">Call the Groom</a>
       <a href="tel:+10000000001" data-i18n="callBride">Call the Bride</a>
+    </div>
+  </section>
+
+  <div class="divider reveal">
+    <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
+  </div>
+
+  <!-- COUNTDOWN / DATE -->
+  <section class="reveal save-date-section">
+    <h2 class="save-date-title" data-i18n="saveTheDate">예식 안내</h2>
+    <div class="save-date-info" data-i18n="saveDateInfo">2026년 12월 21일 월요일 오후 5시 00분
+Novotel Melbourne Glen Waverley</div>
+    <div class="save-date-photo">
+      <img id="saveDateImage" alt="Save the date photo" src="" />
+    </div>
+    <div class="save-date-calendar">
+      <div class="save-month" id="saveMonth">12월</div>
+      <div class="save-weekdays">
+        <div data-i18n="weekdaySun">일</div>
+        <div data-i18n="weekdayMon">월</div>
+        <div data-i18n="weekdayTue">화</div>
+        <div data-i18n="weekdayWed">수</div>
+        <div data-i18n="weekdayThu">목</div>
+        <div data-i18n="weekdayFri">금</div>
+        <div data-i18n="weekdaySat">토</div>
+      </div>
+      <div class="save-days" id="saveDays"></div>
+    </div>
+  </section>
+
+  <div class="divider reveal">
+    <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
+  </div>
+
+  <!-- TOGETHER TIME / STORY -->
+  <section class="reveal">
+    <div class="together-time">
+      <div class="label" data-i18n="togetherLabel">함께한 시간</div>
+      <div class="value" id="togetherTime">"0년 0일 0시간 0분 0초"</div>
+    </div>
+    <div class="eyebrow" style="margin-top:28px;" data-i18n="ourStoryTitle">우리의 이야기</div>
+    <div class="story-list">
+      <div class="story-row">
+        <div class="story-image" data-i18n="storyImagePlaceholder">Image Placeholder</div>
+        <div class="dot"></div>
+        <div class="story-copy">
+          <h3 data-i18n="story1Title">첫 만남</h3>
+          <p data-i18n-html="story1Text">저희는 스페인에서<br><strong>처음</strong> 만났어요.</p>
+        </div>
+      </div>
+      <div class="story-row reverse">
+        <div class="story-image" data-i18n="storyImagePlaceholder">Image Placeholder</div>
+        <div class="dot"></div>
+        <div class="story-copy">
+          <h3 data-i18n="story2Title">1주년</h3>
+          <p data-i18n-html="story2Text"><strong>함께한 1년</strong><br>서로를 알아가는 시간이었어요.</p>
+        </div>
+      </div>
+      <div class="story-row">
+        <div class="story-image" data-i18n="storyImagePlaceholder">Image Placeholder</div>
+        <div class="dot"></div>
+        <div class="story-copy">
+          <h3 data-i18n="story3Title">2주년</h3>
+          <p data-i18n-html="story3Text"><strong>함께한 2년</strong><br>우리는 결혼을 결심했어요.</p>
+        </div>
+      </div>
+      <div class="story-row reverse">
+        <div class="story-image" data-i18n="storyImagePlaceholder">Image Placeholder</div>
+        <div class="dot"></div>
+        <div class="story-copy">
+          <h3 data-i18n="story4Title">Wedding Day</h3>
+          <p data-i18n-html="story4Text">저희는 이날 <strong>결혼해요</strong>.<br>저희의 시작을 축하해주세요.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -512,39 +867,7 @@
   <section class="reveal">
     <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
     <h2 class="headline" data-i18n="rsvpTitle">RSVP</h2>
-    <form class="rsvp" id="rsvpForm" action="https://formspree.io/f/xjybyopb" method="POST">
-      <input type="hidden" name="form_type" value="RSVP">
-      <input type="hidden" id="rsvpAttend" name="attending" value="yes">
-      <div class="field">
-        <label data-i18n="fullName">Full Name</label>
-        <input type="text" id="rsvpName" name="full_name" required>
-      </div>
-      <div class="field">
-        <label data-i18n="attending">Attending?</label>
-        <div class="toggle-row" id="attendToggle">
-          <button type="button" data-val="yes" class="active" data-i18n="accept">Joyfully Accept</button>
-          <button type="button" data-val="no" data-i18n="decline">Regretfully Decline</button>
-        </div>
-      </div>
-      <div class="field" id="rsvpGuestCountField">
-        <label data-i18n="guestCount">Number of Guests</label>
-        <select id="rsvpGuests" name="guest_count">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-        <div class="field-note" data-i18n="upToFour">Up to 4 guests.</div>
-      </div>
-      <div class="guest-fields" id="guestFields"></div>
-      <div class="field">
-        <label data-i18n="messageOptional">Message (optional)</label>
-        <textarea id="rsvpMsg" name="message" rows="3"></textarea>
-      </div>
-      <button type="submit" class="submit-btn" data-i18n="sendRsvp">Send RSVP</button>
-    </form>
-    <div class="rsvp-thanks" id="rsvpThanks" data-i18n="rsvpThanks">Thank you — your response has been recorded.</div>
+    <button type="button" class="submit-btn rsvp-launch" id="openRsvpModal" data-i18n="confirmRsvp">Confirm RSVP</button>
   </section>
 
   <div class="divider reveal">
@@ -601,6 +924,59 @@
 
 </div>
 
+<div class="rsvp-notice-modal" id="rsvpNoticeModal" aria-hidden="true">
+  <div class="rsvp-notice">
+    <h3 class="rsvp-notice-title" data-i18n="rsvpNoticeTitle">참석 여부 전달</h3>
+    <p class="rsvp-notice-copy" data-i18n="rsvpNoticeCopy">소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n예식이 지정좌석제로 진행되오니,\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
+    <p class="rsvp-notice-em" data-i18n-html="rsvpNoticeMeta"><strong>신랑 Changheon Chung, 신부 Cheihyun Lee</strong><br>2026년 12월 21일 월요일 오후 5시 00분<br><strong>Novotel Melbourne Glen Waverley</strong></p>
+    <button type="button" class="submit-btn rsvp-notice-confirm" id="confirmRsvpNotice" data-i18n="confirmRsvp">참석 여부 전달</button>
+    <button type="button" class="rsvp-notice-close-day" id="dismissRsvpNoticeToday" data-i18n="hideToday">오늘하루 보지않기</button>
+  </div>
+</div>
+
+<div class="rsvp-modal" id="rsvpModal" aria-hidden="true">
+  <div class="rsvp-modal-panel">
+    <button type="button" class="rsvp-modal-close" id="closeRsvpModal" aria-label="Close RSVP">&times;</button>
+    <section style="padding-top:36px;">
+      <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
+      <h2 class="headline" data-i18n="rsvpTitle">RSVP</h2>
+      <form class="rsvp" id="rsvpForm" action="https://formspree.io/f/xjybyopb" method="POST">
+        <input type="hidden" name="form_type" value="RSVP">
+        <input type="hidden" id="rsvpAttend" name="attending" value="yes">
+        <div class="field">
+          <label data-i18n="fullName">Full Name</label>
+          <input type="text" id="rsvpName" name="full_name" required>
+        </div>
+        <div class="field">
+          <label data-i18n="attending">Attending?</label>
+          <div class="toggle-row" id="attendToggle">
+            <button type="button" data-val="yes" class="active" data-i18n="accept">Joyfully Accept</button>
+            <button type="button" data-val="no" data-i18n="decline">Regretfully Decline</button>
+          </div>
+        </div>
+        <div class="field" id="rsvpGuestCountField">
+          <label data-i18n="guestCount">Number of Guests</label>
+          <select id="rsvpGuests" name="guest_count">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <div class="field-note" data-i18n="upToFour">Up to 4 guests.</div>
+        </div>
+        <div class="guest-fields" id="guestFields"></div>
+        <div class="field">
+          <label data-i18n="messageOptional">Message (optional)</label>
+          <textarea id="rsvpMsg" name="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" data-i18n="sendRsvp">Send RSVP</button>
+      </form>
+      <div class="rsvp-thanks" id="rsvpThanks" data-i18n="rsvpThanks">Thank you — your response has been recorded.</div>
+    </section>
+  </div>
+</div>
+
 <script>
   // scroll reveal
   const io = new IntersectionObserver((entries)=>{
@@ -612,6 +988,7 @@
   const i18n = {
     en: {
       pageTitle: "Changheon & Cheihyun - We're Getting Married",
+      introMarried: "We're getting married",
       coverMark: 'The Wedding Of',
       coverDate: 'Monday · December 21, 2026 · 5:00 PM',
       scroll: 'Scroll<span></span>',
@@ -619,6 +996,14 @@
       greetingText: 'Two paths, wandering separately,<br>have found their way to one.<br><br>We are grateful for every yesterday<br>that led us here, and even more<br>for the tomorrows we\'ll now share.<br><br>Please join us as we begin this new chapter — your presence would mean the world.',
       saveTheDate: 'Save The Date',
       dateHeadline: 'December 21, 2026 · 5:00 PM',
+      saveDateInfo: 'Monday, December 21, 2026 5:00 PM\nNovotel Melbourne Glen Waverley',
+      weekdaySun: 'Sun',
+      weekdayMon: 'Mon',
+      weekdayTue: 'Tue',
+      weekdayWed: 'Wed',
+      weekdayThu: 'Thu',
+      weekdayFri: 'Fri',
+      weekdaySat: 'Sat',
       days: 'Days',
       hours: 'Hours',
       minutes: 'Min',
@@ -642,6 +1027,11 @@
       copied: 'Copied!',
       kindlyReply: 'Kindly Reply',
       rsvpTitle: 'RSVP',
+      confirmRsvp: 'Confirm RSVP',
+      rsvpNoticeTitle: 'RSVP Confirmation',
+      rsvpNoticeCopy: 'Thank you for taking the time to join our wedding.\nThis celebration will use assigned seating.\nPlease send your attendance response so we can prepare with care.',
+      rsvpNoticeMeta: '<strong>Groom Changheon Chung, Bride Cheihyun Lee</strong><br>Monday, December 21, 2026 · 5:00 PM<br><strong>Novotel Melbourne Glen Waverley</strong>',
+      hideToday: 'Do not show today',
       fullName: 'Full Name',
       attending: 'Attending?',
       accept: 'Joyfully Accept',
@@ -672,9 +1062,23 @@
       guestbookEmpty: 'Be the first to leave a note.',
       endingQuote: '"Two hearts, one home,<br>one promise made forever."',
       endingSign: 'Changheon & Cheihyun · December 21, 2026 · 5:00 PM'
+      ,
+      togetherLabel: 'Time Together',
+      togetherFormat: '"{y} years {d} days {h} hours {m} min {s} sec"',
+      ourStoryTitle: 'Our Story',
+      storyImagePlaceholder: 'Add Image Here',
+      story1Title: 'First Meeting',
+      story1Text: 'We first met in Spain.<br><strong>First meeting</strong>',
+      story2Title: '1st Anniversary',
+      story2Text: '<strong>One year together</strong><br>we were still learning each other.',
+      story3Title: '2nd Anniversary',
+      story3Text: '<strong>Two years together</strong><br>we decided to get married.',
+      story4Title: 'Wedding Day',
+      story4Text: 'We are getting <strong>married</strong> on this day.<br>Please celebrate our beginning.'
     },
     ko: {
       pageTitle: '창헌 & 채현 - 결혼합니다',
+      introMarried: '저희 결혼합니다',
       coverMark: '우리의 결혼식',
       coverDate: '2026년 12월 21일 월요일 · 오후 5:00',
       scroll: '스크롤<span></span>',
@@ -682,6 +1086,14 @@
       greetingText: '서로 다른 길을 걷던 두 사람이<br>하나의 길에서 만났습니다.<br><br>오늘에 이르기까지 함께해 준 모든 시간에 감사하며,<br>앞으로 함께할 내일을 기대합니다.<br><br>새로운 시작의 순간에 함께해 주세요. 당신의 존재는 우리에게 큰 기쁨입니다.',
       saveTheDate: '예식 안내',
       dateHeadline: '2026년 12월 21일 · 오후 5:00',
+      saveDateInfo: '2026년 12월 21일 월요일 오후 5시 00분\nNovotel Melbourne Glen Waverley',
+      weekdaySun: '일',
+      weekdayMon: '월',
+      weekdayTue: '화',
+      weekdayWed: '수',
+      weekdayThu: '목',
+      weekdayFri: '금',
+      weekdaySat: '토',
       days: '일',
       hours: '시간',
       minutes: '분',
@@ -705,6 +1117,11 @@
       copied: '복사됨!',
       kindlyReply: '참석 여부 회신',
       rsvpTitle: 'RSVP',
+      confirmRsvp: '참석 여부 전달',
+      rsvpNoticeTitle: '참석 여부 전달',
+      rsvpNoticeCopy: '소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n예식이 지정좌석제로 진행되오니,\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.',
+      rsvpNoticeMeta: '<strong>신랑 Changheon Chung, 신부 Cheihyun Lee</strong><br>2026년 12월 21일 월요일 오후 5시 00분<br><strong>Novotel Melbourne Glen Waverley</strong>',
+      hideToday: '오늘하루 보지않기',
       fullName: '성함',
       attending: '참석하시나요?',
       accept: '기쁘게 참석합니다',
@@ -735,6 +1152,19 @@
       guestbookEmpty: '첫 번째 축하 메시지를 남겨주세요.',
       endingQuote: '"두 마음이 하나 되어,<br>영원한 약속을 나눕니다."',
       endingSign: '창헌 & 채현 · 2026년 12월 21일 · 오후 5:00'
+      ,
+      togetherLabel: '함께한 시간',
+      togetherFormat: '"{y}년 {d}일 {h}시간 {m}분 {s}초"',
+      ourStoryTitle: '우리의 이야기',
+      storyImagePlaceholder: '이미지를 넣어주세요',
+      story1Title: '첫 만남',
+      story1Text: '저희는 스페인에서<br><strong>처음</strong> 만났어요.',
+      story2Title: '1주년',
+      story2Text: '<strong>함께한 1년</strong><br>서로를 알아가는 시간이었어요.',
+      story3Title: '2주년',
+      story3Text: '<strong>함께한 2년</strong><br>우리는 결혼을 결심했어요.',
+      story4Title: 'Wedding Day',
+      story4Text: '저희는 이날 <strong>결혼해요</strong>.<br>저희의 시작을 축하해주세요.'
     }
   };
 
@@ -765,6 +1195,8 @@
       const key = el.dataset.i18nPlaceholder;
       el.placeholder = t(key);
     });
+
+    renderSaveDateCalendar();
   }
 
   document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
@@ -775,8 +1207,175 @@
     });
   });
 
+  const introOverlay = document.getElementById('introOverlay');
+  const rsvpNoticeModal = document.getElementById('rsvpNoticeModal');
+  const rsvpModal = document.getElementById('rsvpModal');
+  const openRsvpModalBtn = document.getElementById('openRsvpModal');
+  const confirmRsvpNoticeBtn = document.getElementById('confirmRsvpNotice');
+  const dismissRsvpNoticeTodayBtn = document.getElementById('dismissRsvpNoticeToday');
+  const closeRsvpModalBtn = document.getElementById('closeRsvpModal');
+  const coverSection = document.querySelector('.cover');
+  let autoRsvpShown = false;
+
+  function todayStamp(){
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function isRsvpNoticeHiddenToday(){
+    return localStorage.getItem('rsvpNoticeHiddenDate') === todayStamp();
+  }
+
+  function syncBodyLock(){
+    const introVisible = introOverlay && !introOverlay.classList.contains('hide');
+    const noticeVisible = rsvpNoticeModal && rsvpNoticeModal.classList.contains('open');
+    const modalVisible = rsvpModal && rsvpModal.classList.contains('open');
+    document.body.classList.toggle('modal-open', introVisible || noticeVisible || modalVisible);
+  }
+
+  function openRsvpNotice(){
+    if(isRsvpNoticeHiddenToday()) return;
+    rsvpNoticeModal.classList.add('open');
+    rsvpNoticeModal.setAttribute('aria-hidden', 'false');
+    syncBodyLock();
+  }
+
+  function closeRsvpNotice(){
+    rsvpNoticeModal.classList.remove('open');
+    rsvpNoticeModal.setAttribute('aria-hidden', 'true');
+    syncBodyLock();
+  }
+
+  function openRsvpModal(){
+    closeRsvpNotice();
+    rsvpModal.classList.add('open');
+    rsvpModal.setAttribute('aria-hidden', 'false');
+    syncBodyLock();
+  }
+
+  function closeRsvpModal(){
+    rsvpModal.classList.remove('open');
+    rsvpModal.setAttribute('aria-hidden', 'true');
+    syncBodyLock();
+  }
+
+  function dismissIntro(){
+    if(!introOverlay) return;
+    introOverlay.classList.add('hide');
+    setTimeout(syncBodyLock, 750);
+  }
+
+  if(openRsvpModalBtn){
+    openRsvpModalBtn.addEventListener('click', openRsvpNotice);
+  }
+  if(confirmRsvpNoticeBtn){
+    confirmRsvpNoticeBtn.addEventListener('click', openRsvpModal);
+  }
+  if(dismissRsvpNoticeTodayBtn){
+    dismissRsvpNoticeTodayBtn.addEventListener('click', ()=>{
+      localStorage.setItem('rsvpNoticeHiddenDate', todayStamp());
+      closeRsvpNotice();
+    });
+  }
+  if(closeRsvpModalBtn){
+    closeRsvpModalBtn.addEventListener('click', closeRsvpModal);
+  }
+  if(rsvpNoticeModal){
+    rsvpNoticeModal.addEventListener('click', e=>{
+      if(e.target === rsvpNoticeModal) closeRsvpNotice();
+    });
+  }
+  if(rsvpModal){
+    rsvpModal.addEventListener('click', e=>{
+      if(e.target === rsvpModal) closeRsvpModal();
+    });
+  }
+
+  window.addEventListener('keydown', e=>{
+    if(e.key === 'Escape' && rsvpNoticeModal.classList.contains('open')) closeRsvpNotice();
+    if(e.key === 'Escape' && rsvpModal.classList.contains('open')) closeRsvpModal();
+  });
+
+  window.addEventListener('scroll', ()=>{
+    if(autoRsvpShown) return;
+    const threshold = coverSection ? coverSection.offsetHeight * 0.75 : window.innerHeight * 0.75;
+    if(window.scrollY > threshold){
+      autoRsvpShown = true;
+      openRsvpNotice();
+    }
+  }, { passive:true });
+
+  syncBodyLock();
+  setTimeout(dismissIntro, 2100);
+
   // countdown
   const target = new Date('2026-12-21T17:00:00');
+  const metDate = new Date('2024-12-12T00:00:00');
+
+  function renderSaveDateCalendar(){
+    const monthEl = document.getElementById('saveMonth');
+    const daysEl = document.getElementById('saveDays');
+    if(!monthEl || !daysEl) return;
+
+    const year = target.getFullYear();
+    const month = target.getMonth();
+    const day = target.getDate();
+    const firstWeekday = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    monthEl.textContent = currentLanguage === 'ko'
+      ? `${month + 1}월`
+      : target.toLocaleString('en-US', { month: 'long' });
+
+    const cells = [];
+    for(let i = 0; i < firstWeekday; i += 1){
+      cells.push('<div class="blank"></div>');
+    }
+    for(let d = 1; d <= totalDays; d += 1){
+      const activeClass = d === day ? 'day active' : 'day';
+      cells.push(`<div class="${activeClass}">${d}</div>`);
+    }
+    daysEl.innerHTML = cells.join('');
+  }
+
+  function togetherDuration(now){
+    if(now < metDate){
+      return { y:0, d:0, h:0, m:0, s:0 };
+    }
+
+    let years = now.getFullYear() - metDate.getFullYear();
+    const anchor = new Date(metDate);
+    anchor.setFullYear(metDate.getFullYear() + years);
+    if(anchor > now){
+      years -= 1;
+      anchor.setFullYear(metDate.getFullYear() + years);
+    }
+
+    let remainder = now.getTime() - anchor.getTime();
+    const dayMs = 86400000;
+    const days = Math.floor(remainder / dayMs);
+    remainder -= days * dayMs;
+    const hours = Math.floor(remainder / 3600000);
+    remainder -= hours * 3600000;
+    const minutes = Math.floor(remainder / 60000);
+    remainder -= minutes * 60000;
+    const seconds = Math.floor(remainder / 1000);
+
+    return { y:years, d:days, h:hours, m:minutes, s:seconds };
+  }
+
+  function renderTogetherTime(){
+    const valueEl = document.getElementById('togetherTime');
+    if(!valueEl) return;
+    const parts = togetherDuration(new Date());
+    const text = t('togetherFormat')
+      .replace('{y}', String(parts.y))
+      .replace('{d}', String(parts.d))
+      .replace('{h}', String(parts.h).padStart(2, '0'))
+      .replace('{m}', String(parts.m).padStart(2, '0'))
+      .replace('{s}', String(parts.s).padStart(2, '0'));
+    valueEl.textContent = text;
+  }
+
   function tick(){
     const now = new Date();
     let diff = target - now;
@@ -785,10 +1384,15 @@
     const h = Math.floor((diff/3600000)%24);
     const m = Math.floor((diff/60000)%60);
     const s = Math.floor((diff/1000)%60);
-    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-min').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-sec').textContent = String(s).padStart(2,'0');
+    const cdDays = document.getElementById('cd-days');
+    const cdHours = document.getElementById('cd-hours');
+    const cdMin = document.getElementById('cd-min');
+    const cdSec = document.getElementById('cd-sec');
+    if(cdDays) cdDays.textContent = String(d).padStart(2,'0');
+    if(cdHours) cdHours.textContent = String(h).padStart(2,'0');
+    if(cdMin) cdMin.textContent = String(m).padStart(2,'0');
+    if(cdSec) cdSec.textContent = String(s).padStart(2,'0');
+    renderTogetherTime();
   }
   tick(); setInterval(tick,1000);
 
