@@ -40,6 +40,40 @@
     box-shadow:0 0 60px rgba(0,0,0,0.15);
     overflow:hidden;
   }
+  .lang-switcher{
+    position:fixed;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:60;
+    display:flex;
+    justify-content:center;
+    padding:0;
+  }
+  .lang-box{
+    display:flex;
+    gap:6px;
+    background:rgba(255,255,255,0.28);
+    border:1px solid rgba(255,255,255,0.45);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    padding:5px;
+  }
+  .lang-btn{
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:6px 10px;
+    cursor:pointer;
+  }
+  .lang-btn.active{
+    background:rgba(52,69,47,0.86);
+    color:#fff;
+  }
   .serif{font-family:'Cormorant Garamond', serif;}
 
   /* ---------- shared section rhythm ---------- */
@@ -349,23 +383,29 @@
 </head>
 <body>
 <div class="card">
+  <div class="lang-switcher">
+    <div class="lang-box" role="group" aria-label="Language switcher">
+      <button type="button" class="lang-btn active" data-lang-btn="en">ENG</button>
+      <button type="button" class="lang-btn" data-lang-btn="ko">KOR</button>
+    </div>
+  </div>
 
   <!-- COVER -->
   <section class="cover">
-    <div class="cover-mark">The Wedding Of</div>
+    <div class="cover-mark" data-i18n="coverMark">The Wedding Of</div>
     <h1 class="cover-names">
-      chch Chung
+      Changheon Chung
       <span class="cover-amp">&amp;</span>
       Cheihyun Lee
     </h1>
-    <div class="cover-date">Monday · December 21, 2026 · 5:00 PM</div>
-    <div class="scroll-cue">Scroll<span></span></div>
+    <div class="cover-date" data-i18n="coverDate">Monday · December 21, 2026 · 5:00 PM</div>
+    <div class="scroll-cue" data-i18n-html="scroll">Scroll<span></span></div>
   </section>
 
   <!-- GREETING -->
   <section class="greeting reveal">
-    <div class="eyebrow">An Invitation</div>
-    <p>
+    <div class="eyebrow" data-i18n="invitation">An Invitation</div>
+    <p data-i18n-html="greetingText">
       Two paths, wandering separately,<br>
       have found their way to one.<br><br>
       We are grateful for every yesterday<br>
@@ -384,19 +424,18 @@
 
   <!-- COUNTDOWN / DATE -->
   <section class="reveal">
-    <div class="eyebrow">Save The Date</div>
-    <h2 class="headline">December 21, 2026 · 5:00 PM</h2>
+    <div class="eyebrow" data-i18n="saveTheDate">Save The Date</div>
+    <h2 class="headline" data-i18n="dateHeadline">December 21, 2026 · 5:00 PM</h2>
     <div class="stamp-wrap">
       <div class="stamp" id="countdown">
-        <div class="unit"><div class="num" id="cd-days">00</div><div class="lab">Days</div></div>
-        <div class="unit"><div class="num" id="cd-hours">00</div><div class="lab">Hours</div></div>
-        <div class="unit"><div class="num" id="cd-min">00</div><div class="lab">Min</div></div>
-        <div class="unit"><div class="num" id="cd-sec">00</div><div class="lab">Sec</div></div>
+        <div class="unit"><div class="num" id="cd-days">00</div><div class="lab" data-i18n="days">Days</div></div>
+        <div class="unit"><div class="num" id="cd-hours">00</div><div class="lab" data-i18n="hours">Hours</div></div>
+        <div class="unit"><div class="num" id="cd-min">00</div><div class="lab" data-i18n="minutes">Min</div></div>
+        <div class="unit"><div class="num" id="cd-sec">00</div><div class="lab" data-i18n="seconds">Sec</div></div>
       </div>
     </div>
     <div class="venue-line">
       <strong>Novotel Melbourne Glen Waverley</strong>
-      Reception to follow at 6:30 PM
     </div>
   </section>
 
@@ -406,25 +445,25 @@
 
   <!-- COUPLE -->
   <section class="reveal">
-    <div class="eyebrow">Meet The Couple</div>
-    <h2 class="headline">With Their Families</h2>
+    <div class="eyebrow" data-i18n="meetCouple">Meet The Couple</div>
+    <h2 class="headline" data-i18n="withFamilies">With Their Families</h2>
     <div class="couple-grid" style="margin-top:26px;">
       <div class="person">
         <div class="frame"></div>
-        <div class="role">Groom</div>
+        <div class="role" data-i18n="groom">Groom</div>
         <div class="name">Changheon Chung</div>
-        <div class="note">Son of<br>Robert &amp; Marianne Reyes</div>
+        <div class="note" data-i18n-html="groomNote">Son of<br>Robert &amp; Marianne Reyes</div>
       </div>
       <div class="person">
         <div class="frame"></div>
-        <div class="role">Bride</div>
+        <div class="role" data-i18n="bride">Bride</div>
         <div class="name">Cheihyun Lee</div>
-        <div class="note">Daughter of<br>David &amp; Susan Hart</div>
+        <div class="note" data-i18n-html="brideNote">Daughter of<br>David &amp; Susan Hart</div>
       </div>
     </div>
     <div class="contact-row">
-      <a href="tel:+10000000000">Call the Groom</a>
-      <a href="tel:+10000000001">Call the Bride</a>
+      <a href="tel:+10000000000" data-i18n="callGroom">Call the Groom</a>
+      <a href="tel:+10000000001" data-i18n="callBride">Call the Bride</a>
     </div>
   </section>
 
@@ -434,8 +473,8 @@
 
   <!-- GALLERY -->
   <section class="reveal">
-    <div class="eyebrow">Our Story</div>
-    <h2 class="headline">Gallery</h2>
+    <div class="eyebrow" data-i18n="ourStory">Our Story</div>
+    <h2 class="headline" data-i18n="gallery">Gallery</h2>
     <div class="gallery-grid" id="gallery">
       <div class="g"></div><div class="g"></div><div class="g"></div>
       <div class="g"></div><div class="g"></div><div class="g"></div>
@@ -450,8 +489,8 @@
 
   <!-- LOCATION -->
   <section class="reveal">
-    <div class="eyebrow">Getting There</div>
-    <h2 class="headline">Venue &amp; Directions</h2>
+    <div class="eyebrow" data-i18n="gettingThere">Getting There</div>
+    <h2 class="headline" data-i18n="venueDirections">Venue &amp; Directions</h2>
     <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
       src="https://www.google.com/maps?q=Novotel+Melbourne+Glen+Waverley+285+Springvale+Rd+Glen+Waverley+VIC+3150&output=embed"></iframe>
     <div class="address">
@@ -459,10 +498,10 @@
       285 Springvale Rd, Glen Waverley VIC 3150
     </div>
     <div class="nav-btns">
-      <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=Novotel+Melbourne+Glen+Waverley+285+Springvale+Rd+Glen+Waverley+VIC+3150">Google Maps</a>
-      <a target="_blank" href="https://maps.apple.com/?daddr=Novotel+Melbourne+Glen+Waverley+285+Springvale+Rd+Glen+Waverley+VIC+3150">Apple Maps</a>
+      <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=Novotel+Melbourne+Glen+Waverley+285+Springvale+Rd+Glen+Waverley+VIC+3150" data-i18n="googleMaps">Google Maps</a>
+      <a target="_blank" href="https://maps.apple.com/?daddr=Novotel+Melbourne+Glen+Waverley+285+Springvale+Rd+Glen+Waverley+VIC+3150" data-i18n="appleMaps">Apple Maps</a>
     </div>
-    <button class="copy-addr" id="copyAddr">Copy address</button>
+    <button class="copy-addr" id="copyAddr" data-i18n="copyAddress">Copy address</button>
   </section>
 
   <div class="divider reveal">
@@ -471,24 +510,24 @@
 
   <!-- RSVP -->
   <section class="reveal">
-    <div class="eyebrow">Kindly Reply</div>
-    <h2 class="headline">RSVP</h2>
+    <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
+    <h2 class="headline" data-i18n="rsvpTitle">RSVP</h2>
     <form class="rsvp" id="rsvpForm" action="https://formspree.io/f/xjybyopb" method="POST">
       <input type="hidden" name="form_type" value="RSVP">
       <input type="hidden" id="rsvpAttend" name="attending" value="yes">
       <div class="field">
-        <label>Full Name</label>
+        <label data-i18n="fullName">Full Name</label>
         <input type="text" id="rsvpName" name="full_name" required>
       </div>
       <div class="field">
-        <label>Attending?</label>
+        <label data-i18n="attending">Attending?</label>
         <div class="toggle-row" id="attendToggle">
-          <button type="button" data-val="yes" class="active">Joyfully Accept</button>
-          <button type="button" data-val="no">Regretfully Decline</button>
+          <button type="button" data-val="yes" class="active" data-i18n="accept">Joyfully Accept</button>
+          <button type="button" data-val="no" data-i18n="decline">Regretfully Decline</button>
         </div>
       </div>
       <div class="field" id="rsvpGuestCountField">
-        <label>Number of Guests</label>
+        <label data-i18n="guestCount">Number of Guests</label>
         <select id="rsvpGuests" name="guest_count">
           <option value="0">0</option>
           <option value="1">1</option>
@@ -496,16 +535,16 @@
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-        <div class="field-note">Up to 4 guests.</div>
+        <div class="field-note" data-i18n="upToFour">Up to 4 guests.</div>
       </div>
       <div class="guest-fields" id="guestFields"></div>
       <div class="field">
-        <label>Message (optional)</label>
+        <label data-i18n="messageOptional">Message (optional)</label>
         <textarea id="rsvpMsg" name="message" rows="3"></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send RSVP</button>
+      <button type="submit" class="submit-btn" data-i18n="sendRsvp">Send RSVP</button>
     </form>
-    <div class="rsvp-thanks" id="rsvpThanks">Thank you — your response has been recorded.</div>
+    <div class="rsvp-thanks" id="rsvpThanks" data-i18n="rsvpThanks">Thank you — your response has been recorded.</div>
   </section>
 
   <div class="divider reveal">
@@ -514,23 +553,23 @@
 
   <!-- GIFT / ACCOUNTS -->
   <section class="reveal">
-    <div class="eyebrow">With Love</div>
-    <h2 class="headline">Gift Registry</h2>
-    <p style="text-align:center; font-size:13px; color:#6d6a5c; margin-top:10px; line-height:1.7;">
+    <div class="eyebrow" data-i18n="withLove">With Love</div>
+    <h2 class="headline" data-i18n="giftRegistry">Gift Registry</h2>
+    <p style="text-align:center; font-size:13px; color:#6d6a5c; margin-top:10px; line-height:1.7;" data-i18n="giftIntro">
       Your presence is the greatest gift. For those who'd like to
       help us start our new home, we've included account details below.
     </p>
     <div class="accordion" id="accordion">
       <div class="acc-item">
-        <div class="acc-head"><span>Groom — Changheon Chung</span><span class="plus">+</span></div>
+        <div class="acc-head"><span data-i18n="groomAccount">Groom — Changheon Chung</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
-          <div class="acc-row"><span>First National · 000-111-2222</span><button class="copy-acc" data-copy="000-111-2222">Copy</button></div>
+          <div class="acc-row"><span>First National · 000-111-2222</span><button class="copy-acc" data-copy="000-111-2222" data-i18n="copy">Copy</button></div>
         </div></div>
       </div>
       <div class="acc-item">
-        <div class="acc-head"><span>Bride — Cheihyun Lee</span><span class="plus">+</span></div>
+        <div class="acc-head"><span data-i18n="brideAccount">Bride — Cheihyun Lee</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
-          <div class="acc-row"><span>Union Bank · 333-444-5555</span><button class="copy-acc" data-copy="333-444-5555">Copy</button></div>
+          <div class="acc-row"><span>Union Bank · 333-444-5555</span><button class="copy-acc" data-copy="333-444-5555" data-i18n="copy">Copy</button></div>
         </div></div>
       </div>
     </div>
@@ -542,13 +581,13 @@
 
   <!-- GUESTBOOK -->
   <section class="reveal">
-    <div class="eyebrow">Leave A Note</div>
-    <h2 class="headline">Guestbook</h2>
+    <div class="eyebrow" data-i18n="leaveNote">Leave A Note</div>
+    <h2 class="headline" data-i18n="guestbook">Guestbook</h2>
     <form class="gb-form" id="gbForm" action="https://formspree.io/f/xjybyopb" method="POST">
       <input type="hidden" name="form_type" value="Guestbook">
-      <input type="text" id="gbName" name="guest_name" placeholder="Your name" required>
-      <textarea id="gbMsg" name="message" rows="3" placeholder="Leave a wish for the couple..." required></textarea>
-      <button type="submit">Post</button>
+      <input type="text" id="gbName" name="guest_name" placeholder="Your name" data-i18n-placeholder="yourName" required>
+      <textarea id="gbMsg" name="message" rows="3" placeholder="Leave a wish for the couple..." data-i18n-placeholder="guestbookPlaceholder" required></textarea>
+      <button type="submit" data-i18n="post">Post</button>
     </form>
     <div class="gb-empty" id="gbStatus" style="display:none; margin-top:12px;"></div>
     <div class="gb-list" id="gbList"></div>
@@ -556,8 +595,8 @@
 
   <!-- ENDING -->
   <section class="ending">
-    <div class="serif">"Two hearts, one home,<br>one promise made forever."</div>
-    <div class="sign">Changheon &amp; Cheihyun · December 21, 2026 · 5:00 PM</div>
+    <div class="serif" data-i18n-html="endingQuote">"Two hearts, one home,<br>one promise made forever."</div>
+    <div class="sign" data-i18n="endingSign">Changheon &amp; Cheihyun · December 21, 2026 · 5:00 PM</div>
   </section>
 
 </div>
@@ -568,6 +607,173 @@
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
   }, {threshold:.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  let currentLanguage = 'en';
+  const i18n = {
+    en: {
+      pageTitle: "Changheon & Cheihyun - We're Getting Married",
+      coverMark: 'The Wedding Of',
+      coverDate: 'Monday · December 21, 2026 · 5:00 PM',
+      scroll: 'Scroll<span></span>',
+      invitation: 'An Invitation',
+      greetingText: 'Two paths, wandering separately,<br>have found their way to one.<br><br>We are grateful for every yesterday<br>that led us here, and even more<br>for the tomorrows we\'ll now share.<br><br>Please join us as we begin this new chapter — your presence would mean the world.',
+      saveTheDate: 'Save The Date',
+      dateHeadline: 'December 21, 2026 · 5:00 PM',
+      days: 'Days',
+      hours: 'Hours',
+      minutes: 'Min',
+      seconds: 'Sec',
+      reception: 'Reception to follow at 6:30 PM',
+      meetCouple: 'Meet The Couple',
+      withFamilies: 'With Their Families',
+      groom: 'Groom',
+      bride: 'Bride',
+      groomNote: 'Son of<br>Robert & Marianne Reyes',
+      brideNote: 'Daughter of<br>David & Susan Hart',
+      callGroom: 'Call the Groom',
+      callBride: 'Call the Bride',
+      ourStory: 'Our Story',
+      gallery: 'Gallery',
+      gettingThere: 'Getting There',
+      venueDirections: 'Venue & Directions',
+      googleMaps: 'Google Maps',
+      appleMaps: 'Apple Maps',
+      copyAddress: 'Copy address',
+      copied: 'Copied!',
+      kindlyReply: 'Kindly Reply',
+      rsvpTitle: 'RSVP',
+      fullName: 'Full Name',
+      attending: 'Attending?',
+      accept: 'Joyfully Accept',
+      decline: 'Regretfully Decline',
+      guestCount: 'Number of Guests',
+      upToFour: 'Up to 4 guests.',
+      guestNameLabel: 'Guest {n} - Full Name',
+      messageOptional: 'Message (optional)',
+      sendRsvp: 'Send RSVP',
+      sendRsvpLoading: 'Sending...',
+      rsvpThanks: 'Thank you — your response has been recorded.',
+      rsvpSubmitSuccess: 'Thank you - your RSVP has been submitted.',
+      rsvpSubmitError: 'Sorry, we could not send your RSVP right now. Please try again.',
+      withLove: 'With Love',
+      giftRegistry: 'Gift Registry',
+      giftIntro: "Your presence is the greatest gift. For those who'd like to help us start our new home, we've included account details below.",
+      groomAccount: 'Groom — Changheon Chung',
+      brideAccount: 'Bride — Cheihyun Lee',
+      copy: 'Copy',
+      leaveNote: 'Leave A Note',
+      guestbook: 'Guestbook',
+      yourName: 'Your name',
+      guestbookPlaceholder: 'Leave a wish for the couple...',
+      post: 'Post',
+      posting: 'Posting...',
+      guestbookSubmitSuccess: 'Thank you. Your message has been submitted.',
+      guestbookSubmitError: 'Sorry, we could not post your message right now. Please try again.',
+      guestbookEmpty: 'Be the first to leave a note.',
+      endingQuote: '"Two hearts, one home,<br>one promise made forever."',
+      endingSign: 'Changheon & Cheihyun · December 21, 2026 · 5:00 PM'
+    },
+    ko: {
+      pageTitle: '창헌 & 채현 - 결혼합니다',
+      coverMark: '우리의 결혼식',
+      coverDate: '2026년 12월 21일 월요일 · 오후 5:00',
+      scroll: '스크롤<span></span>',
+      invitation: '초대합니다',
+      greetingText: '서로 다른 길을 걷던 두 사람이<br>하나의 길에서 만났습니다.<br><br>오늘에 이르기까지 함께해 준 모든 시간에 감사하며,<br>앞으로 함께할 내일을 기대합니다.<br><br>새로운 시작의 순간에 함께해 주세요. 당신의 존재는 우리에게 큰 기쁨입니다.',
+      saveTheDate: '예식 안내',
+      dateHeadline: '2026년 12월 21일 · 오후 5:00',
+      days: '일',
+      hours: '시간',
+      minutes: '분',
+      seconds: '초',
+      reception: '리셉션은 오후 6:30에 이어집니다',
+      meetCouple: '신랑 신부',
+      withFamilies: '가족과 함께',
+      groom: '신랑',
+      bride: '신부',
+      groomNote: '아버지 Robert Reyes<br>어머니 Marianne Reyes의 아들',
+      brideNote: '아버지 David Hart<br>어머니 Susan Hart의 딸',
+      callGroom: '신랑에게 전화',
+      callBride: '신부에게 전화',
+      ourStory: '우리 이야기',
+      gallery: '갤러리',
+      gettingThere: '오시는 길',
+      venueDirections: '예식장 & 교통 안내',
+      googleMaps: '구글 지도',
+      appleMaps: '애플 지도',
+      copyAddress: '주소 복사',
+      copied: '복사됨!',
+      kindlyReply: '참석 여부 회신',
+      rsvpTitle: 'RSVP',
+      fullName: '성함',
+      attending: '참석하시나요?',
+      accept: '기쁘게 참석합니다',
+      decline: '아쉽게 불참합니다',
+      guestCount: '동반 인원',
+      upToFour: '최대 4명까지 가능합니다.',
+      guestNameLabel: '동반 {n} - 성함',
+      messageOptional: '메시지 (선택)',
+      sendRsvp: 'RSVP 보내기',
+      sendRsvpLoading: '전송 중...',
+      rsvpThanks: '감사합니다 — 응답이 기록되었습니다.',
+      rsvpSubmitSuccess: '감사합니다. RSVP가 전송되었습니다.',
+      rsvpSubmitError: '죄송합니다. 지금은 RSVP를 보낼 수 없습니다. 다시 시도해 주세요.',
+      withLove: '마음을 담아',
+      giftRegistry: '축의 안내',
+      giftIntro: '참석해 주시는 것만으로도 큰 선물입니다. 마음을 전하고 싶으신 분들을 위해 계좌 정보를 안내드립니다.',
+      groomAccount: '신랑 — Changheon Chung',
+      brideAccount: '신부 — Cheihyun Lee',
+      copy: '복사',
+      leaveNote: '축하 메시지',
+      guestbook: '방명록',
+      yourName: '성함',
+      guestbookPlaceholder: '신랑 신부에게 축하 메시지를 남겨주세요...',
+      post: '등록',
+      posting: '등록 중...',
+      guestbookSubmitSuccess: '감사합니다. 메시지가 전송되었습니다.',
+      guestbookSubmitError: '죄송합니다. 지금은 메시지를 등록할 수 없습니다. 다시 시도해 주세요.',
+      guestbookEmpty: '첫 번째 축하 메시지를 남겨주세요.',
+      endingQuote: '"두 마음이 하나 되어,<br>영원한 약속을 나눕니다."',
+      endingSign: '창헌 & 채현 · 2026년 12월 21일 · 오후 5:00'
+    }
+  };
+
+  function t(key){
+    return i18n[currentLanguage][key] || i18n.en[key] || '';
+  }
+
+  function applyLanguage(lang){
+    currentLanguage = lang === 'ko' ? 'ko' : 'en';
+    document.title = t('pageTitle');
+    document.documentElement.lang = currentLanguage;
+
+    document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+      btn.classList.toggle('active', btn.dataset.langBtn === currentLanguage);
+    });
+
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.dataset.i18n;
+      el.textContent = t(key);
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      const key = el.dataset.i18nHtml;
+      el.innerHTML = t(key);
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.dataset.i18nPlaceholder;
+      el.placeholder = t(key);
+    });
+  }
+
+  document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      applyLanguage(btn.dataset.langBtn);
+      renderGuestFields();
+      renderGuestbook();
+    });
+  });
 
   // countdown
   const target = new Date('2026-12-21T17:00:00');
@@ -598,8 +804,8 @@
   document.getElementById('copyAddr').addEventListener('click', ()=>{
     navigator.clipboard.writeText('Novotel Melbourne Glen Waverley, 285 Springvale Rd, Glen Waverley VIC 3150');
     const btn = document.getElementById('copyAddr');
-    const old = btn.textContent; btn.textContent = 'Copied!';
-    setTimeout(()=>btn.textContent = old, 1500);
+    btn.textContent = t('copied');
+    setTimeout(()=>btn.textContent = t('copyAddress'), 1500);
   });
 
   // accordion
@@ -612,8 +818,8 @@
     b.addEventListener('click', (e)=>{
       e.stopPropagation();
       navigator.clipboard.writeText(b.dataset.copy);
-      const old = b.textContent; b.textContent = 'Copied';
-      setTimeout(()=>b.textContent = old, 1200);
+      b.textContent = t('copied');
+      setTimeout(()=>b.textContent = t('copy'), 1200);
     });
   });
 
@@ -635,7 +841,7 @@
     const guestCount = Math.min(4, Math.max(0, Number.parseInt(rsvpGuests.value, 10) || 0));
     guestFields.innerHTML = Array.from({ length: guestCount }, (_, index) => `
       <div class="field">
-        <label>Guest ${index + 1} - Full Name</label>
+        <label>${t('guestNameLabel').replace('{n}', String(index + 1))}</label>
         <input type="text" name="guest_${index + 1}_full_name" ${attendVal === 'yes' ? 'required' : ''}>
       </div>
     `).join('');
@@ -675,18 +881,18 @@
     const thanks = document.getElementById('rsvpThanks');
     const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
+    submitBtn.textContent = t('sendRsvpLoading');
     document.getElementById('rsvpAttend').value = attendVal;
     try{
       await submitToFormspree(form);
       form.style.display = 'none';
-      thanks.textContent = 'Thank you - your RSVP has been submitted.';
+      thanks.textContent = t('rsvpSubmitSuccess');
       thanks.classList.add('show');
     }catch(_err){
-      thanks.textContent = 'Sorry, we could not send your RSVP right now. Please try again.';
+      thanks.textContent = t('rsvpSubmitError');
       thanks.classList.add('show');
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Send RSVP';
+      submitBtn.textContent = t('sendRsvp');
     }
   });
 
@@ -695,7 +901,7 @@
     const list = JSON.parse(localStorage.getItem('guestbook') || '[]');
     const el = document.getElementById('gbList');
     if(list.length === 0){
-      el.innerHTML = '<div class="gb-empty">Be the first to leave a note.</div>';
+      el.innerHTML = `<div class="gb-empty">${t('guestbookEmpty')}</div>`;
       return;
     }
     el.innerHTML = list.slice().reverse().map(g => `
@@ -720,16 +926,16 @@
     if(!name || !msg) return;
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Posting...';
+    submitBtn.textContent = t('posting');
     status.style.display = 'none';
 
     try{
       await submitToFormspree(form);
     }catch(_err){
-      status.textContent = 'Sorry, we could not post your message right now. Please try again.';
+      status.textContent = t('guestbookSubmitError');
       status.style.display = 'block';
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Post';
+      submitBtn.textContent = t('post');
       return;
     }
 
@@ -737,12 +943,13 @@
     list.push({name, msg, at:new Date().toISOString()});
     localStorage.setItem('guestbook', JSON.stringify(list));
     form.reset();
-    status.textContent = 'Thank you. Your message has been submitted.';
+    status.textContent = t('guestbookSubmitSuccess');
     status.style.display = 'block';
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Post';
+    submitBtn.textContent = t('post');
     renderGuestbook();
   });
+  applyLanguage('en');
   renderGuestbook();
 </script>
 </body>
