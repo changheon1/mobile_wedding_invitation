@@ -559,6 +559,19 @@
     position:relative;
     box-shadow:0 20px 40px rgba(0,0,0,.15);
   }
+  .rsvp-notice-x{
+    position:absolute;
+    top:12px;
+    right:14px;
+    border:none;
+    background:none;
+    font-size:22px;
+    line-height:1;
+    color:#888;
+    cursor:pointer;
+    padding:0;
+  }
+  .rsvp-notice-x:hover{ color:var(--ink); }
   .rsvp-notice-title{
     font-size:18px;
     letter-spacing:.02em;
@@ -923,6 +936,7 @@ Novotel Melbourne Glen Waverley</div>
 
 <div class="rsvp-notice-modal" id="rsvpNoticeModal" aria-hidden="true">
   <div class="rsvp-notice">
+    <button type="button" class="rsvp-notice-x" id="closeRsvpNoticeX" aria-label="Close">&times;</button>
     <h3 class="rsvp-notice-title" data-i18n="rsvpNoticeTitle">참석 여부 전달</h3>
     <p class="rsvp-notice-copy" data-i18n="rsvpNoticeCopy">소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n예식이 지정좌석제로 진행되오니,\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
     <p class="rsvp-notice-em" data-i18n-html="rsvpNoticeMeta"><strong>신랑 Changheon Chung, 신부 Cheihyun Lee</strong><br>2026년 12월 21일 월요일 오후 5시 00분<br><strong>Novotel Melbourne Glen Waverley</strong></p>
@@ -1257,7 +1271,6 @@ Novotel Melbourne Glen Waverley</div>
   function closeRsvpNotice(){
     rsvpNoticeModal.classList.remove('open');
     rsvpNoticeModal.setAttribute('aria-hidden', 'true');
-    autoRsvpShown = false;
     syncBodyLock();
   }
 
@@ -1293,6 +1306,10 @@ Novotel Melbourne Glen Waverley</div>
   }
   if(closeRsvpModalBtn){
     closeRsvpModalBtn.addEventListener('click', closeRsvpModal);
+  }
+  const closeRsvpNoticeXBtn = document.getElementById('closeRsvpNoticeX');
+  if(closeRsvpNoticeXBtn){
+    closeRsvpNoticeXBtn.addEventListener('click', closeRsvpNotice);
   }
   if(rsvpNoticeModal){
     rsvpNoticeModal.addEventListener('click', e=>{
