@@ -145,8 +145,8 @@
 
   /* ---------- cover ---------- */
   .cover{
-    height:100vh;
-    min-height:680px;
+    height:auto;
+    min-height:0;
     padding:0;
     display:flex;
     flex-direction:column;
@@ -157,10 +157,11 @@
     background:
       linear-gradient(180deg, rgba(35,46,31,0.15) 0%, rgba(30,38,26,0.15) 45%, rgba(20,26,18,0.86) 100%),
       linear-gradient(160deg, #6b7a5c 0%, #495c40 45%, #2f3d28 100%);
+    aspect-ratio:3/6;
   }
   .cover-mark{
     margin-top:auto;
-    padding-top:22vh;
+    padding-top:60px;
     font-family:'ChosunGu', serif;
     font-style:italic;
     font-size:13px;
@@ -349,7 +350,7 @@
     overflow:hidden;
     box-shadow:0 10px 24px rgba(0,0,0,.10);
     background:linear-gradient(150deg,#dcd5c4,#b6ad95);
-    aspect-ratio:4/5;
+    aspect-ratio:4/3;
   }
   .save-date-photo img{
     width:100%;
@@ -677,7 +678,7 @@
   ::selection{ background:var(--gold); color:#fff; }
 </style>
 </head>
-<body>
+<body class="modal-open">
 <div class="intro-overlay" id="introOverlay">
   <div class="intro-inner">
     <div class="intro-kicker" data-i18n="introMarried">We're getting married</div>
@@ -1261,7 +1262,7 @@ Novotel Melbourne Glen Waverley</div>
   function dismissIntro(){
     if(!introOverlay) return;
     introOverlay.classList.add('hide');
-    setTimeout(syncBodyLock, 750);
+    setTimeout(syncBodyLock, 800);
   }
 
   if(openRsvpModalBtn){
