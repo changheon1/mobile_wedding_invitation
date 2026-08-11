@@ -667,9 +667,26 @@
     display:flex; justify-content:space-between; align-items:center;
     font-size:13px; padding:6px 0; color:#5a5f4f;
   }
+  .acc-actions{
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
   .acc-row button{
     border:none; background:var(--paper-soft); padding:5px 10px; font-size:10px;
     letter-spacing:.06em; text-transform:uppercase; cursor:pointer; color:var(--forest);
+  }
+  .acc-row .paypal-send{
+    display:inline-block;
+    border:none;
+    background:var(--paper-soft);
+    padding:5px 10px;
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--forest);
+    text-decoration:none;
+    line-height:1.2;
   }
 
   /* ---------- guestbook ---------- */
@@ -914,12 +931,26 @@ Novotel Melbourne Glen Waverley</div>
         <div class="acc-head"><span data-i18n="groomAccount">Groom — Changheon Chung</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
           <div class="acc-row"><span>First National · 000-111-2222</span><button class="copy-acc" data-copy="000-111-2222" data-i18n="copy">Copy</button></div>
+          <div class="acc-row">
+            <span>PayPal · @groom.paypal.id</span>
+            <div class="acc-actions">
+              <a class="paypal-send" href="https://paypal.me/groompaypalid" target="_blank" rel="noopener" data-i18n="sendViaPaypal">Send via PayPal</a>
+              <button class="copy-acc" data-copy="@groom.paypal.id" data-copy-label="copyPaypalId" data-i18n="copyPaypalId">Copy PayPal ID</button>
+            </div>
+          </div>
         </div></div>
       </div>
       <div class="acc-item">
         <div class="acc-head"><span data-i18n="brideAccount">Bride — Cheihyun Lee</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
           <div class="acc-row"><span>Union Bank · 333-444-5555</span><button class="copy-acc" data-copy="333-444-5555" data-i18n="copy">Copy</button></div>
+          <div class="acc-row">
+            <span>PayPal · @bride.paypal.id</span>
+            <div class="acc-actions">
+              <a class="paypal-send" href="https://paypal.me/bridepaypalid" target="_blank" rel="noopener" data-i18n="sendViaPaypal">Send via PayPal</a>
+              <button class="copy-acc" data-copy="@bride.paypal.id" data-copy-label="copyPaypalId" data-i18n="copyPaypalId">Copy PayPal ID</button>
+            </div>
+          </div>
         </div></div>
       </div>
     </div>
@@ -1097,6 +1128,8 @@ Novotel Melbourne Glen Waverley</div>
       giftIntro: "Your presence is the greatest gift. For those who'd like to help us start our new home, we've included account details below.",
       groomAccount: 'Groom — Changheon Chung',
       brideAccount: 'Bride — Cheihyun Lee',
+      sendViaPaypal: 'Send via PayPal',
+      copyPaypalId: 'Copy PayPal ID',
       copy: 'Copy',
       leaveNote: 'Leave A Note',
       guestbook: 'Guestbook',
@@ -1195,6 +1228,8 @@ Novotel Melbourne Glen Waverley</div>
       giftIntro: '참석해 주시는 것만으로도 큰 선물입니다. 마음을 전하고 싶으신 분들을 위해 계좌 정보를 안내드립니다.',
       groomAccount: '남편 — 정창헌',
       brideAccount: '아내 — 이채현',
+      sendViaPaypal: 'PayPal로 보내기',
+      copyPaypalId: 'PayPal ID 복사',
       copy: '복사',
       leaveNote: '축하 메시지',
       guestbook: '방명록',
@@ -1479,8 +1514,9 @@ Novotel Melbourne Glen Waverley</div>
     b.addEventListener('click', (e)=>{
       e.stopPropagation();
       navigator.clipboard.writeText(b.dataset.copy);
+      const copyLabelKey = b.dataset.copyLabel || 'copy';
       b.textContent = t('copied');
-      setTimeout(()=>b.textContent = t('copy'), 1200);
+      setTimeout(()=>b.textContent = t(copyLabelKey), 1200);
     });
   });
 
