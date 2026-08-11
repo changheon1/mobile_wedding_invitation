@@ -268,6 +268,9 @@
     min-height:150px;
     position:relative;
   }
+  .story-row .story-image{ grid-column:1; }
+  .story-row .dot{ grid-column:2; justify-self:center; }
+  .story-row .story-copy{ grid-column:3; }
   .story-row.reverse .story-image{ grid-column:3; }
   .story-row.reverse .story-copy{ grid-column:1; }
   .story-row .dot{
@@ -313,6 +316,8 @@
   .story-copy{
     padding:6px 8px;
     text-align:center;
+    max-width:150px;
+    margin:0 auto;
   }
   .story-copy h3{
     font-size:14px;
