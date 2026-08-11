@@ -132,8 +132,8 @@
     margin-bottom:14px;
   }
   .headline{
-    font-family:'ChosunGu', serif;
-    font-size:34px;
+    font-family:'ChosunGu',sans-serif;
+    font-size:19px;
     font-weight:500;
     text-align:center;
     color:var(--ink);
@@ -217,6 +217,11 @@
     line-height:1.9;
     text-align:center;
     color:#454b3d;
+    width:47%;
+    margin:0 auto;
+  }
+  html[lang="en"] .greeting p{
+    width:-30%;
   }
   .greeting .names-sign{
     margin-top:28px;
@@ -337,9 +342,10 @@
   /* ---------- save the date ---------- */
   .save-date-section{ padding-top:72px; }
   .save-date-title{
+    font-family:'ChosunGu',sans-serif;
     text-align:center;
-    color:#6e7d66;
-    font-size:34px;
+    color:#454b3d;
+    font-size:19px;
     font-weight:400;
     line-height:1.2;
     margin-bottom:10px;
@@ -548,6 +554,20 @@
   }
   .rsvp-thanks.show{ display:block; }
   .rsvp-launch{ width:100%; }
+  .rsvp-countdown{
+    margin-top:12px;
+    text-align:center;
+    font-size:12px;
+    color:#5a5f4f;
+    letter-spacing:.04em;
+  }
+  .rsvp-countdown .value{
+    display:block;
+    margin-top:4px;
+    font-size:14px;
+    color:var(--forest-dark);
+    font-weight:600;
+  }
   .rsvp-notice-modal{
     position:fixed;
     inset:0;
@@ -582,7 +602,8 @@
   }
   .rsvp-notice-x:hover{ color:var(--ink); }
   .rsvp-notice-title{
-    font-size:18px;
+    font-family:'ChosunGu',sans-serif;
+    font-size:19px;
     letter-spacing:.02em;
     margin-bottom:12px;
     color:var(--ink);
@@ -765,8 +786,6 @@
 
   <!-- COUPLE -->
   <section class="reveal">
-    <div class="eyebrow" data-i18n="meetCouple">Meet The Couple</div>
-    <h2 class="headline" data-i18n="withFamilies">With Their Families</h2>
     <div class="couple-grid" style="margin-top:26px;">
       <div class="person">
         <div class="frame"></div>
@@ -911,6 +930,7 @@ Novotel Melbourne Glen Waverley</div>
     <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
     <h2 class="headline" data-i18n="rsvpTitle">RSVP</h2>
     <button type="button" class="submit-btn rsvp-launch" id="openRsvpModal" data-i18n="confirmRsvp">Confirm RSVP</button>
+    <p class="rsvp-countdown"><span data-i18n="rsvpCountdown">RSVP closes in</span><span class="value" id="rsvpCountdownValue">00d 00h 00m 00s</span></p>
   </section>
 
   <div class="divider reveal">
@@ -944,7 +964,7 @@ Novotel Melbourne Glen Waverley</div>
       <div class="acc-item">
         <div class="acc-head"><span data-i18n="brideAccount">Bride — Cheihyun Lee</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
-          <div class="acc-row"><span>Union Bank · 333-444-5555</span><button class="copy-acc" data-copy="333-444-5555" data-i18n="copy">Copy</button></div>
+          <div class="acc-row"><span>CBA · BSB: 063097 Account: 83757741</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757741" data-i18n="copy">Copy</button></div>
           <div class="acc-row"><span>신부측 아버지 · 농협은행 203-12-134532</span><button class="copy-acc" data-copy="농협은행 203-12-134532" data-i18n="copy">Copy</button></div>
           <div class="acc-row"><span>신부측 어머니 · 신한은행 717-04-097458</span><button class="copy-acc" data-copy="신한은행 717-04-097458" data-i18n="copy">Copy</button></div>
           <div class="acc-row">
@@ -989,8 +1009,8 @@ Novotel Melbourne Glen Waverley</div>
   <div class="rsvp-notice">
     <button type="button" class="rsvp-notice-x" id="closeRsvpNoticeX" aria-label="Close">&times;</button>
     <h3 class="rsvp-notice-title" data-i18n="rsvpNoticeTitle">참석 여부 전달</h3>
-    <p class="rsvp-notice-copy" data-i18n="rsvpNoticeCopy">소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n예식이 지정좌석제로 진행되오니,\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
-    <p class="rsvp-notice-em" data-i18n-html="rsvpNoticeMeta"><strong>신랑 정창헌, 신부 이채현</strong><br>2026년 12월 21일 월요일 오후 5시 00분<br><strong>Novotel Melbourne Glen Waverley</strong></p>
+    <p class="rsvp-notice-copy" data-i18n="rsvpNoticeCopy">소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
+    <p class="rsvp-notice-em" data-i18n-html="rsvpNoticeMeta"><strong>신랑 정창헌, 신부 이채현</strong><br>2026년 12월 21일 월요일 오후 6시 00분<br><strong>Novotel Melbourne Glen Waverley</strong></p>
     <button type="button" class="submit-btn rsvp-notice-confirm" id="confirmRsvpNotice" data-i18n="confirmRsvp">참석 여부 전달</button>
   </div>
 </div>
@@ -1067,7 +1087,7 @@ Novotel Melbourne Glen Waverley</div>
       coverDate: 'Monday · December 21, 2026 · 6:00 PM',
       scroll: 'Scroll<span></span>',
       invitation: 'An Invitation',
-      greetingText: 'As we look back on the journey that has brought us here,<br>we are reminded that every moment has been a gift of God\'s grace.<br>We pray that the home we build together will be established by God,<br>and that our lives may become a vessel through which<br>His love and grace are shared with others.<br>We would be honored to have you join us<br>and bless the beginning of our life together.',
+      greetingText: 'As we look back on the journey that has brought us here, we are reminded that every moment has been a gift of God\'s grace.<br>We pray that the home we build together will be established by God,<br>and that our lives may become a vessel through which His love and grace are shared with others.<br>We would be honored to have you join us and bless the beginning of our life together.',
       namesSign: 'Groom - Changheon Chung<br>Bride - Cheihyun Lee',
       saveTheDate: 'Save The Date',
       dateHeadline: 'December 21, 2026 · 6:00 PM',
@@ -1105,8 +1125,10 @@ Novotel Melbourne Glen Waverley</div>
       kindlyReply: 'Kindly Reply',
       rsvpTitle: 'RSVP',
       confirmRsvp: 'Confirm RSVP',
+      rsvpCountdown: 'RSVP closes in',
+      rsvpCountdownEnded: 'RSVP period has ended.',
       rsvpNoticeTitle: 'RSVP Confirmation',
-      rsvpNoticeCopy: 'Thank you for taking the time to join our wedding.\nThis celebration will use assigned seating.\nPlease send your attendance response so we can prepare with care.',
+      rsvpNoticeCopy: 'Thank you for taking the time to join our wedding.\nPlease send your attendance response so we can prepare with care.',
       rsvpNoticeMeta: '<strong>Groom Changheon Chung, Bride Cheihyun Lee</strong><br>Monday, December 21, 2026 · 6:00 PM<br><strong>Novotel Melbourne Glen Waverley</strong>',
       hideToday: 'Do not show today',
       guestSide: 'Which side are you a guest of?',
@@ -1150,13 +1172,13 @@ Novotel Melbourne Glen Waverley</div>
       togetherFormat: '"{y} years {d} days {h} hours {m} min {s} sec"',
       ourStoryTitle: 'Our Story',
       storyImagePlaceholder: 'Add Image Here',
-      story1Title: '1 · How We Met',
+      story1Title: 'How We Met',
       story1Text: 'We first met in Wellington, New Zealand.',
-      story2Title: '2 · 7 Years of Friendship',
+      story2Title: '7 Years of Friendship',
       story2Text: 'For the next seven years, we remained good friends.',
-      story3Title: '3 · From Friends to Lovers',
+      story3Title: 'From Friends to Lovers',
       story3Text: 'We met again in Melbourne,<br>and our friendship blossomed into love.',
-      story4Title: '4 · Our Wedding',
+      story4Title: 'Our Wedding',
       story4Text: 'And after all these years,<br>we\'ve decided to spend the rest of our lives together.'
     },
     ko: {
@@ -1205,8 +1227,10 @@ Novotel Melbourne Glen Waverley</div>
       kindlyReply: '참석 여부 회신',
       rsvpTitle: 'RSVP',
       confirmRsvp: '참석 여부 전달',
+      rsvpCountdown: 'RSVP 마감까지',
+      rsvpCountdownEnded: 'RSVP 접수가 마감되었습니다.',
       rsvpNoticeTitle: '참석 여부 전달',
-      rsvpNoticeCopy: '소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n예식이 지정좌석제로 진행되오니,\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.',
+      rsvpNoticeCopy: '소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.',
       rsvpNoticeMeta: '<strong>신랑 정창헌, 신부 이채현</strong><br>2026년 12월 21일 월요일 오후 6시 00분<br><strong>Novotel Melbourne Glen Waverley</strong>',
       hideToday: '오늘하루 보지않기',
       guestSide: '어느 측 하객이신가요?',
@@ -1250,13 +1274,13 @@ Novotel Melbourne Glen Waverley</div>
       togetherFormat: '"{y}년 {d}일 {h}시간 {m}분 {s}초"',
       ourStoryTitle: '우리의 이야기',
       storyImagePlaceholder: '이미지를 넣어주세요',
-      story1Title: '1 · 첫 만남',
+      story1Title: '첫 만남',
       story1Text: '저희는 뉴질랜드 웰링턴에서 처음 만났어요.',
-      story2Title: '2 · 7 년',
+      story2Title: '7 년',
       story2Text: '그 후 7년간, 좋은 친구로 지냈습니다.',
-      story3Title: '3 · 친구에서 연인으로',
+      story3Title: '친구에서 연인으로',
       story3Text: '멜버른에서 다시 만나<br>친구에서 연인이 되었습니다.',
-      story4Title: '4 · 결혼',
+      story4Title: '결혼',
       story4Text: '그리고 오랜 인연 끝에,<br>평생을 함께하기로 했습니다.'
     }
   };
@@ -1404,7 +1428,28 @@ Novotel Melbourne Glen Waverley</div>
 
   // countdown
   const target = new Date('2026-12-21T18:00:00');
+  const rsvpDeadline = new Date('2026-12-13T23:59:59');
   const metDate = new Date('2024-12-12T00:00:00');
+
+  function renderRsvpCountdown(now){
+    const el = document.getElementById('rsvpCountdownValue');
+    if(!el) return;
+
+    let diff = rsvpDeadline - now;
+    if(diff <= 0){
+      el.textContent = t('rsvpCountdownEnded');
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    diff -= d * 86400000;
+    const h = Math.floor(diff / 3600000);
+    diff -= h * 3600000;
+    const m = Math.floor(diff / 60000);
+    diff -= m * 60000;
+    const s = Math.floor(diff / 1000);
+    el.textContent = `${String(d).padStart(2,'0')}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
 
   function renderSaveDateCalendar(){
     const monthEl = document.getElementById('saveMonth');
@@ -1488,6 +1533,7 @@ Novotel Melbourne Glen Waverley</div>
     if(cdMin) cdMin.textContent = String(m).padStart(2,'0');
     if(cdSec) cdSec.textContent = String(s).padStart(2,'0');
     renderTogetherTime();
+    renderRsvpCountdown(now);
   }
   tick(); setInterval(tick,1000);
 
