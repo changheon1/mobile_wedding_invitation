@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Wedding Program - Changheon &amp; Cheihyun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://salondeletter.com/css/font/ChosunGu.css">
+<style>
+  :root{
+    --paper:#FAF6EF;
+    --paper-soft:#F3EDE0;
+    --ink:#2A2E25;
+    --forest:#34452F;
+    --line:#D8D0C0;
+    --white:#FFFDF8;
+    --max:460px;
+    --nav-h:64px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:#E7E1D3;
+    color:var(--ink);
+    font-family:'ChosunGu', 'Jost', sans-serif;
+    font-weight:300;
+    display:flex;
+    justify-content:center;
+  }
+  .card{
+    width:100%;
+    max-width:var(--max);
+    background:var(--paper);
+    min-height:100vh;
+    position:relative;
+    box-shadow:0 0 60px rgba(0,0,0,0.15);
+    padding-bottom:var(--nav-h);
+  }
+  .serif{font-family:'ChosunGu', serif;}
+
+  section{
+    min-height:100vh;
+    padding:70px 32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'ChosunGu',sans-serif;
+    font-size:12px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--forest);
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .headline{
+    font-family:'ChosunGu',serif;
+    font-size:26px;
+    font-weight:500;
+    text-align:center;
+    color:var(--ink);
+    margin-bottom:24px;
+    letter-spacing:.02em;
+  }
+  .bow{
+    text-align:center;
+    font-size:26px;
+    color:var(--forest);
+    margin-bottom:18px;
+  }
+  .divider{
+    display:flex; align-items:center; justify-content:center;
+    margin:24px 0;
+  }
+
+  /* ---------- cover ---------- */
+  #cover .cover-names{
+    font-family:'ChosunGu', serif;
+    font-size:34px;
+    line-height:1.35;
+    text-align:center;
+    margin-bottom:18px;
+  }
+  #cover .cover-amp{
+    display:block;
+    font-style:italic;
+    font-size:20px;
+    color:var(--forest);
+    margin:4px 0;
+  }
+  #cover .cover-date{
+    text-align:center;
+    font-size:13px;
+    letter-spacing:.12em;
+    color:#5a5f4f;
+    margin-bottom:32px;
+  }
+  #cover .cover-verse{
+    text-align:center;
+    font-size:12px;
+    letter-spacing:.06em;
+    color:#8b8574;
+    line-height:1.8;
+  }
+
+  /* ---------- welcome / thanks ---------- */
+  .prose{
+    font-size:15px;
+    line-height:2;
+    text-align:center;
+    color:#454b3d;
+  }
+
+  /* ---------- order of service table ---------- */
+  .order-table{
+    width:100%;
+    border-collapse:collapse;
+  }
+  .order-table tr{
+    border-bottom:1px solid var(--line);
+  }
+  .order-table td{
+    padding:12px 4px;
+    font-size:14px;
+    color:#454b3d;
+  }
+  .order-table td:first-child{
+    width:38%;
+    color:var(--forest);
+    letter-spacing:.04em;
+    font-weight:500;
+  }
+  .order-table td:last-child{
+    text-align:right;
+  }
+
+  /* ---------- lyrics / scripture / vows ---------- */
+  .lyrics p, .scripture p{
+    font-size:14px;
+    line-height:2.1;
+    text-align:center;
+    color:#454b3d;
+  }
+  .vows-block{
+    margin-bottom:36px;
+    text-align:center;
+  }
+  .vows-block:last-child{ margin-bottom:0; }
+  .vows-block h3{
+    font-family:'ChosunGu',serif;
+    font-size:16px;
+    color:var(--forest);
+    margin-bottom:14px;
+    letter-spacing:.04em;
+  }
+  .vows-block p{
+    font-size:14px;
+    line-height:2;
+    color:#454b3d;
+  }
+
+  /* ---------- bottom nav ---------- */
+  .bottom-nav{
+    position:fixed;
+    bottom:0; left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:var(--max);
+    height:var(--nav-h);
+    background:var(--white);
+    border-top:1px solid var(--line);
+    display:flex;
+    z-index:50;
+  }
+  .bottom-nav button{
+    flex:1;
+    border:none;
+    background:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-family:'ChosunGu',sans-serif;
+    font-size:9px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:#a19c8a;
+    cursor:pointer;
+  }
+  .bottom-nav button svg{ width:18px; height:18px; }
+  .bottom-nav button.active{ color:var(--forest); }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- 표지 -->
+  <section id="cover">
+    <div class="bow">🎀</div>
+    <div class="eyebrow">The Wedding Of</div>
+    <h1 class="cover-names">
+      CHEIHYUN
+      <span class="cover-amp">&amp;</span>
+      CHANGHEON
+    </h1>
+    <div class="cover-date">21 DECEMBER 2026 · MONDAY · 6:00 PM</div>
+    <div class="cover-verse">LOVE, FAITH, HOPE, AND LOVE<br>THE GREATEST OF THESE IS LOVE</div>
+  </section>
+
+  <!-- 인사말 -->
+  <section id="order">
+    <div class="eyebrow">Welcome</div>
+    <h2 class="headline">인사말</h2>
+    <p class="prose">
+      저희 두 사람의 결혼을<br>
+      축복해 주셔서 감사합니다.<br><br>
+      하나님의 사랑 안에서<br>
+      믿음의 가정을 이루어<br>
+      감사하며 살아가겠습니다.<br><br>
+      따뜻한 마음으로<br>
+      함께해 주세요.
+    </p>
+  </section>
+
+  <!-- 예배 순서 -->
+  <section id="scripture">
+    <div class="eyebrow">Wedding Service</div>
+    <h2 class="headline">예배 순서</h2>
+    <table class="order-table">
+      <tr><td>개식사</td><td>사회자</td></tr>
+      <tr><td>찬양</td><td>다 함께</td></tr>
+      <tr><td>대표기도</td><td>김OO 성도</td></tr>
+      <tr><td>성경봉독</td><td>사회자</td></tr>
+      <tr><td>설교</td><td>목사님</td></tr>
+      <tr><td>혼인서약</td><td>신랑 신부</td></tr>
+      <tr><td>축가</td><td>친지 일동</td></tr>
+      <tr><td>축도</td><td>목사님</td></tr>
+    </table>
+  </section>
+
+  <!-- 찬양 -->
+  <section id="vows">
+    <div class="eyebrow">Praise</div>
+    <h2 class="headline">찬양</h2>
+    <div class="lyrics">
+      <p>
+        주의 사랑이 나를 붙드시고<br>
+        주의 평안이 나를 감싸네<br>
+        주의 온유하신 성품이<br>
+        나의 삶을 다스리시네<br><br>
+        주 사랑 안에서 거하는<br>
+        그 삶을 밟힐 것 없이<br>
+        주의 사랑 안에서<br>
+        나 오늘도 감사해
+      </p>
+    </div>
+  </section>
+
+  <!-- 말씀 -->
+  <section id="thanks">
+    <div class="eyebrow">Scripture</div>
+    <h2 class="headline">말씀</h2>
+    <div class="scripture">
+      <p>
+        고린도전서 13장 4-7절<br><br>
+        사랑은 오래 참고 사랑은 온유하며<br>
+        시기하지 아니하며 사랑은 자랑하지<br>
+        아니하며 교만하지 아니하며<br><br>
+        무례히 행하지 아니하며 자기의<br>
+        유익을 구하지 아니하며 성내지<br>
+        아니하며 악한 것을 생각하지 아니하며<br><br>
+        불의를 기뻐하지 아니하며 진리와<br>
+        함께 기뻐하고 모든 것을 참으며<br>
+        모든 것을 믿으며 모든 것을 바라며<br>
+        모든 것을 견디느니라
+      </p>
+    </div>
+  </section>
+
+  <!-- 혼인서약 -->
+  <section id="vows2">
+    <div class="eyebrow">Marriage Vows</div>
+    <h2 class="headline">혼인서약</h2>
+    <div class="vows-block">
+      <h3>신랑의 서약</h3>
+      <p>나는 당신을 사랑하고 존중하며<br>평생을 함께할 것을 약속합니다.</p>
+    </div>
+    <div class="vows-block">
+      <h3>신부의 서약</h3>
+      <p>나는 당신을 사랑하고 의지하며<br>하나님의 뜻 안에서<br>함께 걸어갈 것을 약속합니다.</p>
+    </div>
+  </section>
+
+  <!-- 감사 인사 -->
+  <section id="thanks2">
+    <div class="eyebrow">Thank You</div>
+    <h2 class="headline">감사 인사</h2>
+    <p class="prose">
+      귀한 발걸음으로<br>
+      저희의 시작을 축복해 주셔서<br>
+      진심으로 감사드립니다.<br><br>
+      두 분의 사랑과 기도로<br>
+      더 예쁘고 바르게 성장하는<br>
+      부부가 되겠습니다.<br><br>
+      사랑합니다. 감사합니다.
+    </p>
+  </section>
+
+</div>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button type="button" data-target="cover">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    ORDER
+  </button>
+  <button type="button" data-target="vows">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+    PRAISE
+  </button>
+  <button type="button" data-target="thanks">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M5 8h14"/></svg>
+    SCRIPTURE
+  </button>
+  <button type="button" data-target="vows2">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>
+    VOWS
+  </button>
+  <button type="button" data-target="thanks2">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-9.5-9C.7 8.2 2.4 4.5 6 4.5c2 0 3.5 1.2 4 2.8.5-1.6 2-2.8 4-2.8 3.6 0 5.3 3.7 3.5 7.5-2.5 4.5-9.5 9-9.5 9z"/></svg>
+    THANKS
+  </button>
+</nav>
+
+<script>
+  const navButtons = document.querySelectorAll('#bottomNav button');
+  navButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.getElementById(btn.dataset.target).scrollIntoView({ behavior:'smooth' });
+    });
+  });
+
+  const sections = Array.from(navButtons).map(btn => document.getElementById(btn.dataset.target));
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        navButtons.forEach(btn=>{
+          btn.classList.toggle('active', btn.dataset.target === id);
+        });
+      }
+    });
+  }, { threshold:0.55 });
+  sections.forEach(sec => observer.observe(sec));
+</script>
+</body>
+</html>
