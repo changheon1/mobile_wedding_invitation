@@ -9,6 +9,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://salondeletter.com/css/font/ChosunGu.css">
 <style>
+  .lang-box{
+    display:inline-flex;
+    gap:6px;
+    background:rgba(52,69,47,0.06);
+    border:1px solid var(--line);
+    padding:5px;
+    margin:0 auto 28px;
+  }
+  .lang-btn{
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    font-family:'ChosunGu',sans-serif;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    cursor:pointer;
+  }
+  .lang-btn.active{
+    background:var(--forest);
+    color:#fff;
+  }
   :root{
     --paper:#FAF6EF;
     --paper-soft:#F3EDE0;
@@ -194,6 +217,7 @@
   }
   .bottom-nav button svg{ width:18px; height:18px; }
   .bottom-nav button.active{ color:var(--forest); }
+  .lang-switcher{ text-align:center; }
 </style>
 </head>
 <body>
@@ -201,22 +225,28 @@
 
   <!-- 표지 -->
   <section id="cover">
+    <div class="lang-switcher">
+      <div class="lang-box" role="group" aria-label="Language switcher">
+        <button type="button" class="lang-btn active" data-lang-btn="ko">KOR</button>
+        <button type="button" class="lang-btn" data-lang-btn="en">ENG</button>
+      </div>
+    </div>
     <div class="bow">🎀</div>
-    <div class="eyebrow">The Wedding Of</div>
+    <div class="eyebrow" data-i18n="coverMark">The Wedding Of</div>
     <h1 class="cover-names">
       CHEIHYUN
       <span class="cover-amp">&amp;</span>
       CHANGHEON
     </h1>
-    <div class="cover-date">21 DECEMBER 2026 · MONDAY · 6:00 PM</div>
-    <div class="cover-verse">LOVE, FAITH, HOPE, AND LOVE<br>THE GREATEST OF THESE IS LOVE</div>
+    <div class="cover-date" data-i18n="coverDate">21 DECEMBER 2026 · MONDAY · 6:00 PM</div>
+    <div class="cover-verse" data-i18n-html="coverVerse">LOVE, FAITH, HOPE, AND LOVE<br>THE GREATEST OF THESE IS LOVE</div>
   </section>
 
   <!-- 인사말 -->
   <section id="order">
-    <div class="eyebrow">Welcome</div>
-    <h2 class="headline">인사말</h2>
-    <p class="prose">
+    <div class="eyebrow" data-i18n="welcome">Welcome</div>
+    <h2 class="headline" data-i18n="welcomeTitle">인사말</h2>
+    <p class="prose" data-i18n-html="welcomeText">
       저희 두 사람의 결혼을<br>
       축복해 주셔서 감사합니다.<br><br>
       하나님의 사랑 안에서<br>
@@ -229,26 +259,26 @@
 
   <!-- 예배 순서 -->
   <section id="scripture">
-    <div class="eyebrow">Wedding Service</div>
-    <h2 class="headline">예배 순서</h2>
+    <div class="eyebrow" data-i18n="weddingService">Wedding Service</div>
+    <h2 class="headline" data-i18n="orderTitle">예배 순서</h2>
     <table class="order-table">
-      <tr><td>개식사</td><td>사회자</td></tr>
-      <tr><td>찬양</td><td>다 함께</td></tr>
-      <tr><td>대표기도</td><td>김OO 성도</td></tr>
-      <tr><td>성경봉독</td><td>사회자</td></tr>
-      <tr><td>설교</td><td>목사님</td></tr>
-      <tr><td>혼인서약</td><td>신랑 신부</td></tr>
-      <tr><td>축가</td><td>친지 일동</td></tr>
-      <tr><td>축도</td><td>목사님</td></tr>
+      <tr><td data-i18n="order1">개식사</td><td data-i18n="order1role">사회자</td></tr>
+      <tr><td data-i18n="order2">찬양</td><td data-i18n="order2role">다 함께</td></tr>
+      <tr><td data-i18n="order3">대표기도</td><td data-i18n="order3role">김OO 성도</td></tr>
+      <tr><td data-i18n="order4">성경봉독</td><td data-i18n="order4role">사회자</td></tr>
+      <tr><td data-i18n="order5">설교</td><td data-i18n="order5role">목사님</td></tr>
+      <tr><td data-i18n="order6">혼인서약</td><td data-i18n="order6role">신랑 신부</td></tr>
+      <tr><td data-i18n="order7">축가</td><td data-i18n="order7role">친지 일동</td></tr>
+      <tr><td data-i18n="order8">축도</td><td data-i18n="order8role">목사님</td></tr>
     </table>
   </section>
 
   <!-- 찬양 -->
   <section id="vows">
-    <div class="eyebrow">Praise</div>
-    <h2 class="headline">찬양</h2>
+    <div class="eyebrow" data-i18n="praise">Praise</div>
+    <h2 class="headline" data-i18n="praiseTitle">찬양</h2>
     <div class="lyrics">
-      <p>
+      <p data-i18n-html="praiseText">
         주의 사랑이 나를 붙드시고<br>
         주의 평안이 나를 감싸네<br>
         주의 온유하신 성품이<br>
@@ -263,10 +293,10 @@
 
   <!-- 말씀 -->
   <section id="thanks">
-    <div class="eyebrow">Scripture</div>
-    <h2 class="headline">말씀</h2>
+    <div class="eyebrow" data-i18n="scripture">Scripture</div>
+    <h2 class="headline" data-i18n="scriptureTitle">말씀</h2>
     <div class="scripture">
-      <p>
+      <p data-i18n-html="scriptureText">
         고린도전서 13장 4-7절<br><br>
         사랑은 오래 참고 사랑은 온유하며<br>
         시기하지 아니하며 사랑은 자랑하지<br>
@@ -284,23 +314,23 @@
 
   <!-- 혼인서약 -->
   <section id="vows2">
-    <div class="eyebrow">Marriage Vows</div>
-    <h2 class="headline">혼인서약</h2>
+    <div class="eyebrow" data-i18n="vows">Marriage Vows</div>
+    <h2 class="headline" data-i18n="vowsTitle">혼인서약</h2>
     <div class="vows-block">
-      <h3>신랑의 서약</h3>
-      <p>나는 당신을 사랑하고 존중하며<br>평생을 함께할 것을 약속합니다.</p>
+      <h3 data-i18n="groomVowTitle">신랑의 서약</h3>
+      <p data-i18n-html="groomVowText">나는 당신을 사랑하고 존중하며<br>평생을 함께할 것을 약속합니다.</p>
     </div>
     <div class="vows-block">
-      <h3>신부의 서약</h3>
-      <p>나는 당신을 사랑하고 의지하며<br>하나님의 뜻 안에서<br>함께 걸어갈 것을 약속합니다.</p>
+      <h3 data-i18n="brideVowTitle">신부의 서약</h3>
+      <p data-i18n-html="brideVowText">나는 당신을 사랑하고 의지하며<br>하나님의 뜻 안에서<br>함께 걸어갈 것을 약속합니다.</p>
     </div>
   </section>
 
   <!-- 감사 인사 -->
   <section id="thanks2">
-    <div class="eyebrow">Thank You</div>
-    <h2 class="headline">감사 인사</h2>
-    <p class="prose">
+    <div class="eyebrow" data-i18n="thankYou">Thank You</div>
+    <h2 class="headline" data-i18n="thankYouTitle">감사 인사</h2>
+    <p class="prose" data-i18n-html="thankYouText">
       귀한 발걸음으로<br>
       저희의 시작을 축복해 주셔서<br>
       진심으로 감사드립니다.<br><br>
@@ -316,7 +346,7 @@
 <nav class="bottom-nav" id="bottomNav">
   <button type="button" data-target="cover">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-    ORDER
+    MAIN
   </button>
   <button type="button" data-target="vows">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
@@ -337,6 +367,101 @@
 </nav>
 
 <script>
+  let currentLanguage = 'ko';
+  const i18n = {
+    ko: {
+      coverMark: 'The Wedding Of',
+      coverDate: '2026년 12월 21일 월요일 · 오후 6:00',
+      coverVerse: '사랑, 믿음, 소망 중에<br>제일은 사랑이라',
+      welcome: 'Welcome',
+      welcomeTitle: '인사말',
+      welcomeText: '저희 두 사람의 결혼을<br>축복해 주셔서 감사합니다.<br><br>하나님의 사랑 안에서<br>믿음의 가정을 이루어<br>감사하며 살아가겠습니다.<br><br>따뜻한 마음으로<br>함께해 주세요.',
+      weddingService: 'Wedding Service',
+      orderTitle: '예배 순서',
+      order1: '개식사', order1role: '사회자',
+      order2: '찬양', order2role: '다 함께',
+      order3: '대표기도', order3role: '김OO 성도',
+      order4: '성경봉독', order4role: '사회자',
+      order5: '설교', order5role: '목사님',
+      order6: '혼인서약', order6role: '신랑 신부',
+      order7: '축가', order7role: '친지 일동',
+      order8: '축도', order8role: '목사님',
+      praise: 'Praise',
+      praiseTitle: '찬양',
+      praiseText: '주의 사랑이 나를 붙드시고<br>주의 평안이 나를 감싸네<br>주의 온유하신 성품이<br>나의 삶을 다스리시네<br><br>주 사랑 안에서 거하는<br>그 삶을 밟힐 것 없이<br>주의 사랑 안에서<br>나 오늘도 감사해',
+      scripture: 'Scripture',
+      scriptureTitle: '말씀',
+      scriptureText: '고린도전서 13장 4-7절<br><br>사랑은 오래 참고 사랑은 온유하며<br>시기하지 아니하며 사랑은 자랑하지<br>아니하며 교만하지 아니하며<br><br>무례히 행하지 아니하며 자기의<br>유익을 구하지 아니하며 성내지<br>아니하며 악한 것을 생각하지 아니하며<br><br>불의를 기뻐하지 아니하며 진리와<br>함께 기뻐하고 모든 것을 참으며<br>모든 것을 믿으며 모든 것을 바라며<br>모든 것을 견디느니라',
+      vows: 'Marriage Vows',
+      vowsTitle: '혼인서약',
+      groomVowTitle: '신랑의 서약',
+      groomVowText: '나는 당신을 사랑하고 존중하며<br>평생을 함께할 것을 약속합니다.',
+      brideVowTitle: '신부의 서약',
+      brideVowText: '나는 당신을 사랑하고 의지하며<br>하나님의 뜻 안에서<br>함께 걸어갈 것을 약속합니다.',
+      thankYou: 'Thank You',
+      thankYouTitle: '감사 인사',
+      thankYouText: '귀한 발걸음으로<br>저희의 시작을 축복해 주셔서<br>진심으로 감사드립니다.<br><br>두 분의 사랑과 기도로<br>더 예쁘고 바르게 성장하는<br>부부가 되겠습니다.<br><br>사랑합니다. 감사합니다.'
+    },
+    en: {
+      coverMark: 'The Wedding Of',
+      coverDate: 'MONDAY · DECEMBER 21, 2026 · 6:00 PM',
+      coverVerse: 'LOVE, FAITH, HOPE, AND LOVE<br>THE GREATEST OF THESE IS LOVE',
+      welcome: 'Welcome',
+      welcomeTitle: 'Welcome Message',
+      welcomeText: 'Thank you for blessing<br>the marriage of the two of us.<br><br>In God\'s love, we will build<br>a home of faith and live<br>each day with gratitude.<br><br>Please join us<br>with a warm heart.',
+      weddingService: 'Wedding Service',
+      orderTitle: 'Order of Service',
+      order1: 'Opening', order1role: 'Officiant',
+      order2: 'Praise', order2role: 'All',
+      order3: 'Prayer', order3role: 'Mr./Ms. Kim',
+      order4: 'Scripture Reading', order4role: 'Officiant',
+      order5: 'Sermon', order5role: 'Pastor',
+      order6: 'Marriage Vows', order6role: 'Bride & Groom',
+      order7: 'Congratulatory Song', order7role: 'Family & Friends',
+      order8: 'Benediction', order8role: 'Pastor',
+      praise: 'Praise',
+      praiseTitle: 'Praise',
+      praiseText: 'Your love holds me close,<br>Your peace surrounds me,<br>Your gentle nature<br>guides my life.<br><br>Living within Your love,<br>never to stumble,<br>within Your love<br>I give thanks today.',
+      scripture: 'Scripture',
+      scriptureTitle: 'Scripture',
+      scriptureText: '1 Corinthians 13:4-7<br><br>Love suffers long and is kind;<br>love does not envy;<br>love does not parade itself,<br>is not puffed up;<br><br>Does not behave rudely,<br>does not seek its own,<br>is not provoked,<br>thinks no evil;<br><br>Does not rejoice in iniquity,<br>but rejoices in the truth;<br>bears all things, believes all things,<br>hopes all things, endures all things.',
+      vows: 'Marriage Vows',
+      vowsTitle: 'Marriage Vows',
+      groomVowTitle: 'Groom\'s Vow',
+      groomVowText: 'I will love and respect you,<br>and promise to be with you for life.',
+      brideVowTitle: 'Bride\'s Vow',
+      brideVowText: 'I will love and rely on you,<br>and promise to walk together<br>within God\'s will.',
+      thankYou: 'Thank You',
+      thankYouTitle: 'Thank You',
+      thankYouText: 'With your precious presence,<br>you have blessed the beginning<br>of our new journey.<br><br>With your love and prayers,<br>we will grow into a couple<br>who lives beautifully and rightly.<br><br>We love you. Thank you.'
+    }
+  };
+
+  function t(key){
+    return i18n[currentLanguage][key] || i18n.ko[key] || '';
+  }
+
+  function applyLanguage(lang){
+    currentLanguage = lang === 'en' ? 'en' : 'ko';
+    document.documentElement.lang = currentLanguage;
+
+    document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+      btn.classList.toggle('active', btn.dataset.langBtn === currentLanguage);
+    });
+
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      el.textContent = t(el.dataset.i18n);
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      el.innerHTML = t(el.dataset.i18nHtml);
+    });
+  }
+
+  document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+    btn.addEventListener('click', ()=> applyLanguage(btn.dataset.langBtn));
+  });
+
   const navButtons = document.querySelectorAll('#bottomNav button');
   navButtons.forEach(btn=>{
     btn.addEventListener('click', ()=>{
