@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Changheon &amp; Cheihyun - We're Getting Married</title>
+<title>Chris &amp; Claire - We're Getting Married</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -466,7 +466,8 @@
   .person .name{
     font-family:'ChosunGu', serif; font-size:22px; font-weight:500; margin-bottom:6px;
   }
-  .person .note{ font-size:12px; color:#6d6a5c; line-height:1.6; }
+  .person .note{ margin-top:12px; font-size:12px; color:#6d6a5c; line-height:1.6; }
+  .person .bio{ font-size:13px; color:#6d6a5c; line-height:1.7; }
   .contact-row{
     display:flex; justify-content:center; gap:28px; margin-top:26px;
   }
@@ -635,6 +636,41 @@
     text-decoration:underline;
     cursor:pointer;
   }
+  .directions-modal{
+    position:fixed;
+    inset:0;
+    z-index:125;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(24,30,20,.58);
+    padding:20px;
+  }
+  .directions-modal.open{ display:flex; }
+  .directions-modal-panel{
+    width:100%;
+    max-width:390px;
+    max-height:80vh;
+    overflow-y:auto;
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:22px 20px 20px;
+    position:relative;
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+  }
+  .directions-tabs{
+    display:flex; gap:8px; margin-bottom:16px;
+  }
+  .directions-tab{
+    flex:1; padding:10px 4px; font-size:12px; letter-spacing:.06em;
+    border:1px solid var(--line); background:var(--white); color:var(--ink); cursor:pointer;
+  }
+  .directions-tab.active{ background:var(--forest); border-color:var(--forest); color:#fff; }
+  .directions-content{
+    display:none; font-size:13px; color:#575d4d; line-height:1.7; white-space:pre-line;
+  }
+  .directions-content.active{ display:block; }
+
   .rsvp-modal{
     position:fixed;
     inset:0;
@@ -742,7 +778,7 @@
 <div class="intro-overlay" id="introOverlay">
   <div class="intro-inner">
     <div class="intro-kicker" data-i18n="introMarried">We're getting married</div>
-    <div class="intro-names">Changheon &amp; Cheihyun</div>
+    <div class="intro-names">Chris &amp; Claire</div>
   </div>
 </div>
 <div class="card">
@@ -757,9 +793,9 @@
   <section class="cover">
     <div class="cover-mark" data-i18n="coverMark">The Wedding Of</div>
     <h1 class="cover-names" data-i18n-html="coverNames">
-      Changheon Chung
+      Chris Chung
       <span class="cover-amp">&amp;</span>
-      Cheihyun Lee
+      Claire Lee
     </h1>
     <div class="cover-date" data-i18n="coverDate">Monday · December 21, 2026 · 6:00 PM</div>
     <div class="scroll-cue" data-i18n-html="scroll">Scroll<span></span></div>
@@ -790,13 +826,15 @@
       <div class="person">
         <div class="frame"></div>
         <div class="role" data-i18n="groom">Groom</div>
-        <div class="name" data-i18n="groomName">Changheon Chung</div>
+        <div class="name" data-i18n="groomName">Chris Chung</div>
+        <div class="bio" data-i18n-html="groomBio">97년 1월 27일<br><br>커피 · 운동 러버<br>부지런함이 일상인 개발자<br><br>믿음으로 가정을 든든히 세우는<br>남편이 되겠습니다</div>
         <div class="note" data-i18n-html="groomNote">Son of<br>Hocheol Chung (정호철) &amp; Yongju Son (손용주)</div>
       </div>
       <div class="person">
         <div class="frame"></div>
         <div class="role" data-i18n="bride">Bride</div>
-        <div class="name" data-i18n="brideName">Cheihyun Lee</div>
+        <div class="name" data-i18n="brideName">Claire Lee</div>
+        <div class="bio" data-i18n-html="brideBio">94년 7월 26일<br><br>요리 · 디저트 러버<br>맛있는 것에 진심인 요리사<br><br>하나님을 바라보며<br>사랑으로 섬기는 아내가 되겠습니다</div>
         <div class="note" data-i18n-html="brideNote">Daughter of<br>Yongwoon Lee (이용운) &amp; Eunyoung Choi (최은영)</div>
       </div>
     </div>
@@ -919,6 +957,7 @@ Novotel Melbourne Glen Waverley</div>
       <a target="_blank" href="https://maps.apple.com/?daddr=Novotel+Melbourne+Glen+Waverley+285+Springvale+Rd+Glen+Waverley+VIC+3150" data-i18n="appleMaps">Apple Maps</a>
     </div>
     <button class="copy-addr" id="copyAddr" data-i18n="copyAddress">Copy address</button>
+    <button type="button" class="submit-btn directions-launch" id="openDirectionsModal" style="margin-top:16px; width:100%;" data-i18n="howToGetThere">How to Get There</button>
   </section>
 
   <div class="divider reveal">
@@ -947,31 +986,31 @@ Novotel Melbourne Glen Waverley</div>
     </p>
     <div class="accordion" id="accordion">
       <div class="acc-item">
-        <div class="acc-head"><span data-i18n="groomAccount">Groom — Changheon Chung</span><span class="plus">+</span></div>
+        <div class="acc-head"><span data-i18n="groomAccount">Groom — Chris Chung</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
           <div class="acc-row"><span>CBA · BSB: 063097 Account: 83757741</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757741" data-i18n="copy">Copy</button></div>
           <div class="acc-row"><span>신랑 아버지 · CBA · BSB: 063464 Account: 11119469</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757742" data-i18n="copy">Copy</button></div>
           <div class="acc-row"><span>신랑 어머니 · (계좌정보 추후 추가)</span></div>
           <div class="acc-row">
-            <span>PayPal · @Changheon Chung</span>
+            <span>PayPal · @Chris Chung</span>
             <div class="acc-actions">
               <a class="paypal-send" href="https://paypal.me/ChangheonChung" target="_blank" rel="noopener" data-i18n="sendViaPaypal">Send via PayPal</a>
-              <button class="copy-acc" data-copy="Changheon Chung" data-copy-label="copyPaypalId" data-i18n="copyPaypalId">Copy PayPal ID</button>
+              <button class="copy-acc" data-copy="Chris Chung" data-copy-label="copyPaypalId" data-i18n="copyPaypalId">Copy PayPal ID</button>
             </div>
           </div>
         </div></div>
       </div>
       <div class="acc-item">
-        <div class="acc-head"><span data-i18n="brideAccount">Bride — Cheihyun Lee</span><span class="plus">+</span></div>
+        <div class="acc-head"><span data-i18n="brideAccount">Bride — Claire Lee</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
           <div class="acc-row"><span>CBA · BSB: 063097 Account: 83757741</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757741" data-i18n="copy">Copy</button></div>
           <div class="acc-row"><span>신부측 아버지 · 농협은행 203-12-134532</span><button class="copy-acc" data-copy="농협은행 203-12-134532" data-i18n="copy">Copy</button></div>
           <div class="acc-row"><span>신부측 어머니 · 신한은행 717-04-097458</span><button class="copy-acc" data-copy="신한은행 717-04-097458" data-i18n="copy">Copy</button></div>
           <div class="acc-row">
-            <span>PayPal · @Changheon Chung</span>
+            <span>PayPal · @Chris Chung</span>
             <div class="acc-actions">
               <a class="paypal-send" href="https://paypal.me/ChangheonChung" target="_blank" rel="noopener" data-i18n="sendViaPaypal">Send via PayPal</a>
-              <button class="copy-acc" data-copy="Changheon Chung" data-copy-label="copyPaypalId" data-i18n="copyPaypalId">Copy PayPal ID</button>
+              <button class="copy-acc" data-copy="Chris Chung" data-copy-label="copyPaypalId" data-i18n="copyPaypalId">Copy PayPal ID</button>
             </div>
           </div>
         </div></div>
@@ -1000,9 +1039,25 @@ Novotel Melbourne Glen Waverley</div>
   <!-- ENDING -->
   <section class="ending">
     <div class="serif" data-i18n-html="endingQuote">"Two hearts, one home,<br>one promise made forever."</div>
-    <div class="sign" data-i18n="endingSign">Changheon &amp; Cheihyun · December 21, 2026 · 6:00 PM</div>
+    <div class="sign" data-i18n="endingSign">Chris &amp; Claire · December 21, 2026 · 6:00 PM</div>
   </section>
 
+</div>
+
+<div class="directions-modal" id="directionsModal" aria-hidden="true">
+  <div class="directions-modal-panel">
+    <button type="button" class="rsvp-notice-x" id="closeDirectionsModal" aria-label="Close">&times;</button>
+    <h3 class="rsvp-notice-title" data-i18n="howToGetThere">How to Get There</h3>
+    <div class="directions-tabs">
+      <button type="button" class="directions-tab active" data-tab="parking" data-i18n="carPark">Car Park</button>
+      <button type="button" class="directions-tab" data-tab="transport" data-i18n="publicTransport">Public Transport</button>
+    </div>
+    <div class="directions-content active" data-panel="parking" data-i18n="carParkInfo">Library Car Park — 293 Springvale Rd, Glen Waverley VIC 3150
+Bogong Ave Car Park — 5 Bogong Ave, Glen Waverley VIC 3150</div>
+    <div class="directions-content" data-panel="transport" data-i18n="publicTransportInfo">Train: Take the Glen Waverley line to the last stop, Glen Waverley Station (about 40 min from Flinders Street Station).
+From the station, it's about a 20 min walk to the hotel, or a short 5 min taxi/rideshare ride.
+Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
+  </div>
 </div>
 
 <div class="rsvp-notice-modal" id="rsvpNoticeModal" aria-hidden="true">
@@ -1057,8 +1112,13 @@ Novotel Melbourne Glen Waverley</div>
             <option value="4">4</option>
           </select>
           <div class="field-note" data-i18n="upToFour">Up to 4 guests.</div>
+          <div class="field-note" data-i18n="babyChairNote">Parents with infants, please bring your own baby chair if you have one.</div>
         </div>
         <div class="guest-fields" id="guestFields"></div>
+        <div class="field">
+          <label data-i18n="dietaryLabel">Dietary Requirements (optional)</label>
+          <input type="text" id="rsvpDietary" name="dietary_requirements" data-i18n-placeholder="dietaryPlaceholder">
+        </div>
         <div class="field">
           <label data-i18n="messageOptional">Message (optional)</label>
           <textarea id="rsvpMsg" name="message" rows="3"></textarea>
@@ -1080,15 +1140,15 @@ Novotel Melbourne Glen Waverley</div>
   let currentLanguage = 'ko';
   const i18n = {
     en: {
-      pageTitle: "Changheon & Cheihyun - We're Getting Married",
+      pageTitle: "Chris & Claire - We're Getting Married",
       introMarried: "We're getting married",
       coverMark: 'The Wedding Of',
-      coverNames: 'Changheon Chung<span class="cover-amp">&amp;</span>Cheihyun Lee',
+      coverNames: 'Chris Chung<span class="cover-amp">&amp;</span>Claire Lee',
       coverDate: 'Monday · December 21, 2026 · 6:00 PM',
       scroll: 'Scroll<span></span>',
       invitation: 'An Invitation',
       greetingText: 'As we look back on the journey that has brought us here, we are reminded that every moment has been a gift of God\'s grace.<br>We pray that the home we build together will be established by God,<br>and that our lives may become a vessel through which His love and grace are shared with others.<br>We would be honored to have you join us and bless the beginning of our life together.',
-      namesSign: 'Groom - Changheon Chung<br>Bride - Cheihyun Lee',
+      namesSign: 'Groom - Chris Chung<br>Bride - Claire Lee',
       saveTheDate: 'Save The Date',
       dateHeadline: 'December 21, 2026 · 6:00 PM',
       saveDateInfo: 'Monday, December 21, 2026 6:00 PM\nNovotel Melbourne Glen Waverley',
@@ -1108,10 +1168,12 @@ Novotel Melbourne Glen Waverley</div>
       withFamilies: 'With Their Families',
       groom: 'Groom',
       bride: 'Bride',
-      groomName: 'Changheon Chung',
-      brideName: 'Cheihyun Lee',
+      groomName: 'Chris Chung',
+      brideName: 'Claire Lee',
       groomNote: 'Son of<br>Hocheol Chung & Yongju Son',
       brideNote: 'Daughter of<br>Yongwoon Lee & Eunyoung Choi',
+      groomBio: 'January 27, 1997<br><br>Coffee · Fitness Lover<br>A developer who lives by diligence<br><br>I will be a husband who builds<br>our home firmly on faith',
+      brideBio: 'July 26, 1994<br><br>Cooking · Dessert Lover<br>A chef devoted to delicious food<br><br>I will be a wife who looks to God<br>and serves with love',
       callGroom: 'Call the Groom',
       callBride: 'Call the Bride',
       ourStory: 'Our Story',
@@ -1121,6 +1183,11 @@ Novotel Melbourne Glen Waverley</div>
       googleMaps: 'Google Maps',
       appleMaps: 'Apple Maps',
       copyAddress: 'Copy address',
+      howToGetThere: 'How to Get There',
+      carPark: 'Car Park',
+      publicTransport: 'Public Transport',
+      carParkInfo: 'Library Car Park — 293 Springvale Rd, Glen Waverley VIC 3150\nBogong Ave Car Park — 5 Bogong Ave, Glen Waverley VIC 3150',
+      publicTransportInfo: 'Train: Take the Glen Waverley line to the last stop, Glen Waverley Station (about 40 min from Flinders Street Station).\nFrom the station, it\'s about a 20 min walk to the hotel, or a short 5 min taxi/rideshare ride.\nBus: Local buses running along Springvale Rd also stop near the hotel.',
       copied: 'Copied!',
       kindlyReply: 'Kindly Reply',
       rsvpTitle: 'RSVP',
@@ -1129,7 +1196,7 @@ Novotel Melbourne Glen Waverley</div>
       rsvpCountdownEnded: 'RSVP period has ended.',
       rsvpNoticeTitle: 'RSVP Confirmation',
       rsvpNoticeCopy: 'Thank you for taking the time to join our wedding.\nPlease send your attendance response so we can prepare with care.',
-      rsvpNoticeMeta: '<strong>Groom Changheon Chung, Bride Cheihyun Lee</strong><br>Monday, December 21, 2026 · 6:00 PM<br><strong>Novotel Melbourne Glen Waverley</strong>',
+      rsvpNoticeMeta: '<strong>Groom Chris Chung, Bride Claire Lee</strong><br>Monday, December 21, 2026 · 6:00 PM<br><strong>Novotel Melbourne Glen Waverley</strong>',
       hideToday: 'Do not show today',
       guestSide: 'Which side are you a guest of?',
       groomSide: "Groom's Side",
@@ -1141,6 +1208,9 @@ Novotel Melbourne Glen Waverley</div>
       decline: 'Regretfully Decline',
       guestCount: 'Number of Guests',
       upToFour: 'Up to 4 guests.',
+      babyChairNote: 'Parents with infants, please bring your own baby chair if you have one.',
+      dietaryLabel: 'Dietary Requirements (optional)',
+      dietaryPlaceholder: 'e.g. vegetarian, gluten-free, allergies...',
       guestNameLabel: 'Guest {n} - Full Name',
       messageOptional: 'Message (optional)',
       sendRsvp: 'Send RSVP',
@@ -1151,8 +1221,8 @@ Novotel Melbourne Glen Waverley</div>
       withLove: 'With Love',
       giftRegistry: 'Gift Registry',
       giftIntro: "Your presence is the greatest gift. For those who'd like to help us start our new home, we've included account details below.",
-      groomAccount: 'Groom — Changheon Chung',
-      brideAccount: 'Bride — Cheihyun Lee',
+      groomAccount: 'Groom — Chris Chung',
+      brideAccount: 'Bride — Claire Lee',
       sendViaPaypal: 'Send via PayPal',
       copyPaypalId: 'Copy PayPal ID',
       copy: 'Copy',
@@ -1166,7 +1236,7 @@ Novotel Melbourne Glen Waverley</div>
       guestbookSubmitError: 'Sorry, we could not post your message right now. Please try again.',
       guestbookEmpty: 'Be the first to leave a note.',
       endingQuote: '"Two hearts, one home,<br>one promise made forever."',
-      endingSign: 'Changheon & Cheihyun · December 21, 2026 · 6:00 PM'
+      endingSign: 'Chris & Claire · December 21, 2026 · 6:00 PM'
       ,
       togetherLabel: 'Time Together',
       togetherFormat: '"{y} years {d} days {h} hours {m} min {s} sec"',
@@ -1214,6 +1284,8 @@ Novotel Melbourne Glen Waverley</div>
       brideName: '이채현',
       groomNote: '아버지 정호철<br>어머니 손용주의 아들',
       brideNote: '아버지 이용운<br>어머니 최은영의 딸',
+      groomBio: '97년 1월 27일<br><br>커피 · 운동 러버<br>부지런함이 일상인 개발자<br><br>믿음으로 가정을 든든히 세우는<br>남편이 되겠습니다',
+      brideBio: '94년 7월 26일<br><br>요리 · 디저트 러버<br>맛있는 것에 진심인 요리사<br><br>하나님을 바라보며<br>사랑으로 섬기는 아내가 되겠습니다',
       callGroom: '신랑에게 전화',
       callBride: '신부에게 전화',
       ourStory: '우리 이야기',
@@ -1223,6 +1295,11 @@ Novotel Melbourne Glen Waverley</div>
       googleMaps: '구글 지도',
       appleMaps: '애플 지도',
       copyAddress: '주소 복사',
+      howToGetThere: '오시는 길 안내',
+      carPark: '주차장',
+      publicTransport: '대중교통',
+      carParkInfo: '도서관 주차장 — 293 Springvale Rd, Glen Waverley VIC 3150\n보공 애비뉴 주차장 — 5 Bogong Ave, Glen Waverley VIC 3150',
+      publicTransportInfo: '기차: Glen Waverley 노선을 타고 종점인 Glen Waverley역에서 하차하세요 (Flinders Street역에서 약 40분 소요).\n역에서 호텔까지는 도보로 약 20분, 택시/차량 호출 서비스로는 약 5분 거리입니다.\n버스: Springvale Rd를 지나는 로컬 버스도 호텔 근처에 정차합니다.',
       copied: '복사됨!',
       kindlyReply: '참석 여부 회신',
       rsvpTitle: 'RSVP',
@@ -1243,6 +1320,9 @@ Novotel Melbourne Glen Waverley</div>
       decline: '아쉽게 불참합니다',
       guestCount: '동반 인원',
       upToFour: '최대 4명까지 가능합니다.',
+      babyChairNote: '아기와 함께 오시는 부모님께서는 보유하신 아기의자가 있으시다면 직접 지참해주시기 바랍니다.',
+      dietaryLabel: '식이 요구사항 (선택)',
+      dietaryPlaceholder: '예: 채식, 글루텐프리, 알레르기 등...',
       guestNameLabel: '동반 {n} - 성함',
       messageOptional: '메시지 (선택)',
       sendRsvp: 'RSVP 보내기',
@@ -1331,6 +1411,9 @@ Novotel Melbourne Glen Waverley</div>
   const confirmRsvpNoticeBtn = document.getElementById('confirmRsvpNotice');
   const dismissRsvpNoticeTodayBtn = document.getElementById('dismissRsvpNoticeToday');
   const closeRsvpModalBtn = document.getElementById('closeRsvpModal');
+  const directionsModal = document.getElementById('directionsModal');
+  const openDirectionsModalBtn = document.getElementById('openDirectionsModal');
+  const closeDirectionsModalBtn = document.getElementById('closeDirectionsModal');
   const coverSection = document.querySelector('.cover');
   let autoRsvpShown = false;
 
@@ -1346,7 +1429,8 @@ Novotel Melbourne Glen Waverley</div>
     const introVisible = introOverlay && !introOverlay.classList.contains('hide');
     const noticeVisible = rsvpNoticeModal && rsvpNoticeModal.classList.contains('open');
     const modalVisible = rsvpModal && rsvpModal.classList.contains('open');
-    document.body.classList.toggle('modal-open', introVisible || noticeVisible || modalVisible);
+    const directionsVisible = directionsModal && directionsModal.classList.contains('open');
+    document.body.classList.toggle('modal-open', introVisible || noticeVisible || modalVisible || directionsVisible);
   }
 
   function openRsvpNotice(){
@@ -1371,6 +1455,18 @@ Novotel Melbourne Glen Waverley</div>
   function closeRsvpModal(){
     rsvpModal.classList.remove('open');
     rsvpModal.setAttribute('aria-hidden', 'true');
+    syncBodyLock();
+  }
+
+  function openDirectionsModal(){
+    directionsModal.classList.add('open');
+    directionsModal.setAttribute('aria-hidden', 'false');
+    syncBodyLock();
+  }
+
+  function closeDirectionsModal(){
+    directionsModal.classList.remove('open');
+    directionsModal.setAttribute('aria-hidden', 'true');
     syncBodyLock();
   }
 
@@ -1409,9 +1505,31 @@ Novotel Melbourne Glen Waverley</div>
     });
   }
 
+  if(openDirectionsModalBtn){
+    openDirectionsModalBtn.addEventListener('click', openDirectionsModal);
+  }
+  if(closeDirectionsModalBtn){
+    closeDirectionsModalBtn.addEventListener('click', closeDirectionsModal);
+  }
+  if(directionsModal){
+    directionsModal.addEventListener('click', e=>{
+      if(e.target === directionsModal) closeDirectionsModal();
+    });
+    directionsModal.querySelectorAll('.directions-tab').forEach(tab=>{
+      tab.addEventListener('click', ()=>{
+        directionsModal.querySelectorAll('.directions-tab').forEach(b=>b.classList.remove('active'));
+        tab.classList.add('active');
+        directionsModal.querySelectorAll('.directions-content').forEach(panel=>{
+          panel.classList.toggle('active', panel.dataset.panel === tab.dataset.tab);
+        });
+      });
+    });
+  }
+
   window.addEventListener('keydown', e=>{
     if(e.key === 'Escape' && rsvpNoticeModal.classList.contains('open')) closeRsvpNotice();
     if(e.key === 'Escape' && rsvpModal.classList.contains('open')) closeRsvpModal();
+    if(e.key === 'Escape' && directionsModal.classList.contains('open')) closeDirectionsModal();
   });
 
   window.addEventListener('scroll', ()=>{
