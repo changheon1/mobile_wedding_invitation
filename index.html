@@ -1115,7 +1115,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
           <div class="field-note" data-i18n="babyChairNote">Parents with infants, please bring your own baby chair if you have one.</div>
         </div>
         <div class="guest-fields" id="guestFields"></div>
-        <div class="field">
+        <div class="field" id="rsvpDietaryField">
           <label data-i18n="dietaryLabel">Dietary Requirements (optional)</label>
           <input type="text" id="rsvpDietary" name="dietary_requirements" data-i18n-placeholder="dietaryPlaceholder">
         </div>
@@ -1701,16 +1701,21 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   const rsvpGuests = document.getElementById('rsvpGuests');
   const rsvpGuestCountField = document.getElementById('rsvpGuestCountField');
   const guestFields = document.getElementById('guestFields');
+  const rsvpDietaryField = document.getElementById('rsvpDietaryField');
+  const rsvpDietary = document.getElementById('rsvpDietary');
 
   function renderGuestFields(){
     if(attendVal !== 'yes'){
       rsvpGuestCountField.style.display = 'none';
       rsvpGuests.value = '0';
       guestFields.innerHTML = '';
+      rsvpDietaryField.style.display = 'none';
+      rsvpDietary.value = '';
       return;
     }
 
     rsvpGuestCountField.style.display = '';
+    rsvpDietaryField.style.display = '';
     const guestCount = Math.min(4, Math.max(0, Number.parseInt(rsvpGuests.value, 10) || 0));
     guestFields.innerHTML = Array.from({ length: guestCount }, (_, index) => `
       <div class="field">
