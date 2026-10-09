@@ -139,8 +139,8 @@
   }
   .divider svg{opacity:.55;}
   .eyebrow{
-    font-family:'ChosunGu',sans-serif;
-    font-size:19px;
+    font-family:'Modu','ChosunGu',sans-serif;
+    font-size:22px;
     letter-spacing:.32em;
     text-transform:uppercase;
     color:var(--forest);
@@ -148,8 +148,8 @@
     margin-bottom:14px;
   }
   .headline{
-    font-family:'ChosunGu',sans-serif;
-    font-size:19px;
+    font-family:'Modu','ChosunGu',sans-serif;
+    font-size:22px;
     font-weight:500;
     text-align:center;
     color:var(--ink);
@@ -228,7 +228,7 @@
   /* ---------- greeting ---------- */
   .greeting .eyebrow{
     font-family:'Modu', 'ChosunGu', sans-serif;
-    font-size:23px;
+    font-size:22px;
     letter-spacing:.06em;
     text-transform:none;
     margin-bottom:22px;
@@ -255,11 +255,12 @@
 
   /* ---------- together time / story ---------- */
   .together-time{
+    font-family:'Modu','ChosunGu',sans-serif;
     text-align:center;
     margin-top:8px;
   }
   .together-time .label{
-    font-size:11px;
+    font-size:22px;
     letter-spacing:.22em;
     text-transform:uppercase;
     color:var(--forest);
@@ -362,15 +363,16 @@
   /* ---------- save the date ---------- */
   .save-date-section{ padding-top:72px; }
   .save-date-title{
-    font-family:'ChosunGu',sans-serif;
+    font-family:'Modu','ChosunGu',sans-serif;
     text-align:center;
     color:#454b3d;
-    font-size:19px;
+    font-size:22px;
     font-weight:400;
     line-height:1.2;
     margin-bottom:10px;
   }
   .save-date-info{
+    font-family:'Modu','ChosunGu',sans-serif;
     text-align:center;
     font-size:18px;
     color:#787f73;
@@ -378,6 +380,7 @@
     letter-spacing:.005em;
     white-space:pre-line;
   }
+  .save-date-venue{ font-size:15px; }
   .save-date-photo{
     margin:30px auto 0;
     width:88%;
@@ -806,7 +809,7 @@
   /* ---------- ending ---------- */
   .ending{
     text-align:center; background:var(--forest-dark); color:var(--paper);
-    padding:100px 32px 70px;
+    padding:65px 32px;
   }
   .ending .serif{ font-size:24px; font-style:italic; line-height:1.7; margin-bottom:18px; }
   .ending .sign{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.7; }
@@ -879,8 +882,8 @@
   <!-- COUNTDOWN / DATE -->
   <section class="reveal save-date-section">
     <h2 class="save-date-title" data-i18n="saveTheDate">예식 안내</h2>
-    <div class="save-date-info" data-i18n="saveDateInfo">2026년 12월 21일 월요일 오후 6시 00분
-Novotel Melbourne Glen Waverley</div>
+    <div class="save-date-info" data-i18n-html="saveDateInfo">2026년 12월 21일 월요일 오후 6시 00분
+<span class="save-date-venue">Novotel Melbourne Glen Waverley</span></div>
     <div class="save-date-photo">
       <img id="saveDateImage" alt="Save the date photo" src="" />
     </div>
@@ -1091,7 +1094,6 @@ Novotel Melbourne Glen Waverley</div>
 
   <!-- ENDING -->
   <section class="ending">
-    <div class="serif" data-i18n-html="endingQuote">"Two hearts, one home,<br>one promise made forever."</div>
     <div class="sign" data-i18n="endingSign">Chris &amp; Claire · December 21, 2026 · 6:00 PM</div>
   </section>
 
@@ -1204,7 +1206,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       namesSign: 'Groom - Chris Chung<br>Bride - Claire Lee',
       saveTheDate: 'Save The Date',
       dateHeadline: 'December 21, 2026 · 6:00 PM',
-      saveDateInfo: 'Monday, December 21, 2026 6:00 PM\nNovotel Melbourne Glen Waverley',
+      saveDateInfo: 'Monday, December 21, 2026 6:00 PM\n<span class="save-date-venue">Novotel Melbourne Glen Waverley</span>',
       weekdaySun: 'Sun',
       weekdayMon: 'Mon',
       weekdayTue: 'Tue',
@@ -1324,7 +1326,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       namesSign: '신랑 - 정창헌<br>신부 - 이채현',
       saveTheDate: '예식 안내',
       dateHeadline: '2026년 12월 21일 · 오후 6:00',
-      saveDateInfo: '2026년 12월 21일 월요일 오후 6시 00분\nNovotel Melbourne Glen Waverley',
+      saveDateInfo: '2026년 12월 21일 월요일 오후 6시 00분\n<span class="save-date-venue">Novotel Melbourne Glen Waverley</span>',
       weekdaySun: '일',
       weekdayMon: '월',
       weekdayTue: '화',
