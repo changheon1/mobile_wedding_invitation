@@ -9,12 +9,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://salondeletter.com/css/font/ChosunGu.css">
 <style>
+  @font-face{
+    font-family:'Yeongwol';
+    src:url('assets/fonts/Yeongwol.ttf') format('truetype'),
+        url('assets/fonts/Yeongwol.otf') format('opentype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Modu';
+    src:url('assets/fonts/Modu.ttf') format('truetype'),
+        url('assets/fonts/Modu.otf') format('opentype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
-    --paper:#FAF6EF;
-    --paper-soft:#F3EDE0;
+    --paper:#FFFFFF;
+    --paper-soft:#F2F2F2;
     --ink:#2A2E25;
-    --forest:#34452F;
-    --forest-dark:#232E1F;
+    --forest:#1A1A1A;
+    --forest-dark:#000000;
     --rose:#8B4A46;
     --gold:#B79556;
     --line:#D8D0C0;
@@ -25,7 +41,7 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:#E7E1D3;
+    background:#FFFFFF;
     color:var(--ink);
     font-family:'ChosunGu', 'Jost', sans-serif;
     font-weight:300;
@@ -95,8 +111,8 @@
   }
   .intro-inner{ text-align:center; padding:20px; }
   .intro-kicker{
-    font-size:12px;
-    letter-spacing:.28em;
+    font-size:34px;
+    letter-spacing:.08em;
     text-transform:uppercase;
     opacity:.85;
     margin-bottom:14px;
@@ -155,8 +171,8 @@
     text-align:center;
     color:var(--white);
     background:
-      linear-gradient(180deg, rgba(35,46,31,0.15) 0%, rgba(30,38,26,0.15) 45%, rgba(20,26,18,0.86) 100%),
-      linear-gradient(160deg, #6b7a5c 0%, #495c40 45%, #2f3d28 100%);
+      linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(8,8,8,0.15) 45%, rgba(5,5,5,0.88) 100%),
+      linear-gradient(160deg, #5a5a5a 0%, #2e2e2e 45%, #141414 100%);
     aspect-ratio:3/6;
   }
   .cover-mark{
@@ -210,18 +226,22 @@
   }
 
   /* ---------- greeting ---------- */
+  .greeting .eyebrow{
+    font-family:'Modu', 'ChosunGu', sans-serif;
+    font-size:23px;
+    letter-spacing:.06em;
+    text-transform:none;
+    margin-bottom:22px;
+  }
   .greeting p{
-    font-family:'ChosunGu', serif;
+    font-family:'Modu', 'ChosunGu', serif;
     font-style:normal;
-    font-size:15px;
+    font-size:19px;
     line-height:1.9;
     text-align:center;
     color:#454b3d;
-    width:47%;
+    width:100%;
     margin:0 auto;
-  }
-  html[lang="en"] .greeting p{
-    width:-30%;
   }
   .greeting .names-sign{
     margin-top:28px;
@@ -289,7 +309,7 @@
     width:10px;
     height:10px;
     border-radius:50%;
-    background:#355534;
+    background:#1A1A1A;
     border:2px solid var(--paper);
   }
   .story-image{
@@ -411,7 +431,7 @@
     height:34px;
     border-radius:50%;
     margin:0 auto;
-    background:#2f3137;
+    background:#000000;
     color:#fff;
   }
 
@@ -449,7 +469,7 @@
   .person{ flex:1; text-align:center; }
   .person .frame{
     width:100%; aspect-ratio:3/4;
-    background:linear-gradient(160deg,#c9d2bd,#93a17f);
+    background:linear-gradient(160deg,#d8d8d8,#8a8a8a);
     border-radius:var(--radius);
     margin-bottom:14px;
     position:relative;
@@ -499,7 +519,7 @@
   .lightbox.open{ display:flex; }
   .lightbox .box{
     width:82%; max-width:380px; aspect-ratio:3/4;
-    background:linear-gradient(160deg,#e4dcc7,#93a17f);
+    background:linear-gradient(160deg,#e4dcc7,#8a8a8a);
   }
   .lightbox .close{
     position:absolute; top:26px; right:26px; color:#fff; font-size:24px; cursor:pointer; font-family:'ChosunGu';
@@ -576,7 +596,7 @@
     display:none;
     align-items:center;
     justify-content:center;
-    background:rgba(24,30,20,.58);
+    background:rgba(0,0,0,.58);
     padding:20px;
   }
   .rsvp-notice-modal.open{ display:flex; }
@@ -608,12 +628,14 @@
     letter-spacing:.02em;
     margin-bottom:12px;
     color:var(--ink);
+    text-align:center;
   }
   .rsvp-notice-copy{
     font-size:13px;
     color:#575d4d;
     line-height:1.7;
     white-space:pre-line;
+    text-align:center;
   }
   .rsvp-notice-em{
     margin-top:12px;
@@ -621,6 +643,7 @@
     color:var(--ink);
     line-height:1.6;
     white-space:pre-line;
+    text-align:center;
   }
   .rsvp-notice-confirm{
     width:100%;
@@ -643,7 +666,7 @@
     display:none;
     align-items:center;
     justify-content:center;
-    background:rgba(24,30,20,.58);
+    background:rgba(0,0,0,.58);
     padding:20px;
   }
   .directions-modal.open{ display:flex; }
@@ -678,7 +701,7 @@
     display:none;
     align-items:flex-start;
     justify-content:center;
-    background:rgba(24,30,20,.74);
+    background:rgba(0,0,0,.74);
     padding:0;
   }
   .rsvp-modal.open{ display:flex; }
@@ -776,9 +799,8 @@
 </head>
 <body class="modal-open">
 <div class="intro-overlay" id="introOverlay">
-  <div class="intro-inner">
-    <div class="intro-kicker" data-i18n="introMarried">We're getting married</div>
-    <div class="intro-names">Chris &amp; Claire</div>
+  <div class="intro-inner" style="font-family:'Yeongwol', serif;">
+    <div class="intro-kicker" data-i18n-html="introMarried">We're getting<br>Married!</div>
   </div>
 </div>
 <div class="card">
@@ -803,16 +825,9 @@
 
   <!-- GREETING -->
   <section class="greeting reveal">
-    <div class="eyebrow" data-i18n="invitation">An Invitation</div>
+    <div class="eyebrow" data-i18n="invitation">소중한 분들을 초대합니다.</div>
     <p data-i18n-html="greetingText">
-      Two paths, wandering separately,<br>
-      have found their way to one.<br><br>
-      We are grateful for every yesterday<br>
-      that led us here, and even more<br>
-      for the tomorrows we'll now share.<br><br>
-      Please join us as we begin this new
-      chapter — your presence would mean
-      the world.
+      하나님의 사랑으로 만난 두 사람이<br>이제 새로운 가정을 이루는<br>아름다운 약속을 하려 합니다.<br><br>언제나 주위에 사랑을 나누는<br>행복한 가정을 이루도록<br>오셔서 축복해 주시고 지켜봐 주십시오.
     </p>
   </section>
 
@@ -1064,9 +1079,10 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   <div class="rsvp-notice">
     <button type="button" class="rsvp-notice-x" id="closeRsvpNoticeX" aria-label="Close">&times;</button>
     <h3 class="rsvp-notice-title" data-i18n="rsvpNoticeTitle">참석 여부 전달</h3>
-    <p class="rsvp-notice-copy" data-i18n="rsvpNoticeCopy">소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
+    <p class="rsvp-notice-copy" data-i18n-html="rsvpNoticeCopy">소중한 시간을 내어 결혼식에<br>참석해주시는 모든 분들께 감사드립니다.<br>예식이 지정좌석제로 진행되오니,<br>참석 여부를 회신해 주시면 더욱 감사하겠습니다.</p>
     <p class="rsvp-notice-em" data-i18n-html="rsvpNoticeMeta"><strong>신랑 정창헌, 신부 이채현</strong><br>2026년 12월 21일 월요일 오후 6시 00분<br><strong>Novotel Melbourne Glen Waverley</strong></p>
     <button type="button" class="submit-btn rsvp-notice-confirm" id="confirmRsvpNotice" data-i18n="confirmRsvp">참석 여부 전달</button>
+    <button type="button" class="rsvp-notice-close-day" id="dismissRsvpNoticeToday" data-i18n="hideToday">오늘하루 보지않기</button>
   </div>
 </div>
 
@@ -1141,13 +1157,12 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   const i18n = {
     en: {
       pageTitle: "Chris & Claire - We're Getting Married",
-      introMarried: "We're getting married",
-      coverMark: 'The Wedding Of',
+      introMarried: "We're getting<br>Married!",
       coverNames: 'Chris Chung<span class="cover-amp">&amp;</span>Claire Lee',
       coverDate: 'Monday · December 21, 2026 · 6:00 PM',
       scroll: 'Scroll<span></span>',
-      invitation: 'An Invitation',
-      greetingText: 'As we look back on the journey that has brought us here, we are reminded that every moment has been a gift of God\'s grace.<br>We pray that the home we build together will be established by God,<br>and that our lives may become a vessel through which His love and grace are shared with others.<br>We would be honored to have you join us and bless the beginning of our life together.',
+      invitation: 'Inviting Our Dear Guests.',
+      greetingText: 'Two people brought together by God\'s love<br>are now beginning a new home together<br>and making a beautiful promise.<br><br>May our home always be a place<br>where love is shared with those around us.<br>Please join us, bless us, and watch over us.',
       namesSign: 'Groom - Chris Chung<br>Bride - Claire Lee',
       saveTheDate: 'Save The Date',
       dateHeadline: 'December 21, 2026 · 6:00 PM',
@@ -1195,7 +1210,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       rsvpCountdown: 'RSVP closes in',
       rsvpCountdownEnded: 'RSVP period has ended.',
       rsvpNoticeTitle: 'RSVP Confirmation',
-      rsvpNoticeCopy: 'Thank you for taking the time to join our wedding.\nPlease send your attendance response so we can prepare with care.',
+      rsvpNoticeCopy: 'Thank you for taking the time to join our wedding.<br>As the ceremony will have reserved seating,<br>please send your attendance response so we can prepare with care.',
       rsvpNoticeMeta: '<strong>Groom Chris Chung, Bride Claire Lee</strong><br>Monday, December 21, 2026 · 6:00 PM<br><strong>Novotel Melbourne Glen Waverley</strong>',
       hideToday: 'Do not show today',
       guestSide: 'Which side are you a guest of?',
@@ -1253,13 +1268,12 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     },
     ko: {
       pageTitle: '창헌 & 채현 - 결혼합니다',
-      introMarried: '저희 결혼합니다',
-      coverMark: '우리의 결혼식',
+      introMarried: "We're getting<br>Married!",
       coverNames: '정창헌<span class="cover-amp">&amp;</span>이채현',
       coverDate: '2026년 12월 21일 월요일 · 오후 6:00',
       scroll: '스크롤<span></span>',
-      invitation: '초대합니다',
-      greetingText: '지나온 시간을 돌아보면 모든 순간이 하나님의 은혜였음을<br>고백하게 됩니다.<br>저희의 작은 가정이 하나님께서 세우시는 집이 되고,<br>받은 사랑과 은혜를 세상 속에 나누는 통로가 되도록 오셔서 축복해 주세요.',
+      invitation: '소중한 분들을 초대합니다.',
+      greetingText: '하나님의 사랑으로 만난 두 사람이<br>이제 새로운 가정을 이루는<br>아름다운 약속을 하려 합니다.<br><br>언제나 주위에 사랑을 나누는<br>행복한 가정을 이루도록<br>오셔서 축복해 주시고 지켜봐 주십시오.',
       namesSign: '신랑 - 정창헌<br>신부 - 이채현',
       saveTheDate: '예식 안내',
       dateHeadline: '2026년 12월 21일 · 오후 6:00',
@@ -1307,7 +1321,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       rsvpCountdown: 'RSVP 마감까지',
       rsvpCountdownEnded: 'RSVP 접수가 마감되었습니다.',
       rsvpNoticeTitle: '참석 여부 전달',
-      rsvpNoticeCopy: '소중한 시간을 내어 결혼식에 참석해주시는 모든 분들께 감사드립니다.\n참석 여부를 회신해 주시면 더욱 감사하겠습니다.',
+      rsvpNoticeCopy: '소중한 시간을 내어 결혼식에<br>참석해주시는 모든 분들께 감사드립니다.<br>예식이 지정좌석제로 진행되오니,<br>참석 여부를 회신해 주시면 더욱 감사하겠습니다.',
       rsvpNoticeMeta: '<strong>신랑 정창헌, 신부 이채현</strong><br>2026년 12월 21일 월요일 오후 6시 00분<br><strong>Novotel Melbourne Glen Waverley</strong>',
       hideToday: '오늘하루 보지않기',
       guestSide: '어느 측 하객이신가요?',
@@ -1487,6 +1501,12 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   if(confirmRsvpNoticeBtn){
     confirmRsvpNoticeBtn.addEventListener('click', openRsvpModal);
   }
+  if(dismissRsvpNoticeTodayBtn){
+    dismissRsvpNoticeTodayBtn.addEventListener('click', ()=>{
+      localStorage.setItem('rsvpNoticeHiddenDate', todayStamp());
+      closeRsvpNotice();
+    });
+  }
   if(closeRsvpModalBtn){
     closeRsvpModalBtn.addEventListener('click', closeRsvpModal);
   }
@@ -1534,6 +1554,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
 
   window.addEventListener('scroll', ()=>{
     if(autoRsvpShown) return;
+    if(isRsvpNoticeHiddenToday()) return;
     const threshold = coverSection ? coverSection.offsetHeight * 0.75 : window.innerHeight * 0.75;
     if(window.scrollY > threshold){
       autoRsvpShown = true;
