@@ -694,6 +694,22 @@
   }
   .directions-content.active{ display:block; }
 
+  /* ---------- photo booth / take-home flowers ---------- */
+  .info-tabs{ display:flex; border-bottom:1px solid var(--line); margin-top:10px; }
+  .info-tab{
+    flex:1; padding:12px 4px; font-size:14px; letter-spacing:.04em;
+    border:none; border-bottom:2px solid transparent; margin-bottom:-1px;
+    background:none; color:#8b8574; cursor:pointer; font-family:inherit;
+  }
+  .info-tab.active{ color:var(--ink); border-bottom-color:var(--forest); }
+  .info-panel{ display:none; margin-top:22px; text-align:center; }
+  .info-panel.active{ display:block; }
+  .info-panel img{
+    width:100%; height:auto; display:block; border-radius:8px;
+    box-shadow:0 8px 20px rgba(0,0,0,.10);
+  }
+  .info-panel p{ margin-top:22px; font-size:15px; line-height:1.9; color:#454b3d; }
+
   .rsvp-modal{
     position:fixed;
     inset:0;
@@ -979,6 +995,27 @@ Novotel Melbourne Glen Waverley</div>
     <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
   </div>
 
+  <!-- PHOTO BOOTH / TAKE-HOME FLOWERS -->
+  <section class="reveal">
+    <div class="eyebrow" data-i18n="guideEyebrow">안내</div>
+    <div class="info-tabs" id="infoTabs">
+      <button type="button" class="info-tab active" data-info="photobooth" data-i18n="photoBooth">포토부스</button>
+      <button type="button" class="info-tab" data-info="flowers" data-i18n="takeHomeFlowers">답례품</button>
+    </div>
+    <div class="info-panel active" data-info-panel="photobooth">
+      <img src="assets/images/Photo_booth.png" alt="Photo booth">
+      <p data-i18n-html="photoBoothText">소중한 날을 기록할 수 있도록<br>포토부스를 준비했습니다.<br>즐거운 추억으로 간직해주세요!</p>
+    </div>
+    <div class="info-panel" data-info-panel="flowers">
+      <img src="assets/images/Flowers_to_take_home.png" alt="Take-home flowers">
+      <p data-i18n-html="takeHomeFlowersText">저희의 하루를 빛내준 꽃들이<br>여러분의 일상에서도<br>피어나길 바랍니다.<br><br>예식에 사용된 꽃들은<br>작은 꽃다발로 준비하여<br>돌아가시는 길에 선물해 드립니다.</p>
+    </div>
+  </section>
+
+  <div class="divider reveal">
+    <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
+  </div>
+
   <!-- RSVP -->
   <section class="reveal">
     <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
@@ -1200,6 +1237,11 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       copyAddress: 'Copy address',
       howToGetThere: 'How to Get There',
       carPark: 'Car Park',
+      guideEyebrow: 'Guide',
+      photoBooth: 'Photo Booth',
+      takeHomeFlowers: 'Take-home Flowers',
+      photoBoothText: 'We have prepared a photo booth<br>to capture this special day.<br>Please keep it as a joyful memory!',
+      takeHomeFlowersText: 'May the flowers that brightened our day<br>continue to bloom in your everyday lives.<br><br>The flowers used at the ceremony<br>have been prepared as small bouquets<br>for you to take home as a gift.',
       publicTransport: 'Public Transport',
       carParkInfo: 'Library Car Park — 293 Springvale Rd, Glen Waverley VIC 3150\nBogong Ave Car Park — 5 Bogong Ave, Glen Waverley VIC 3150',
       publicTransportInfo: 'Train: Take the Glen Waverley line to the last stop, Glen Waverley Station (about 40 min from Flinders Street Station).\nFrom the station, it\'s about a 20 min walk to the hotel, or a short 5 min taxi/rideshare ride.\nBus: Local buses running along Springvale Rd also stop near the hotel.',
@@ -1311,6 +1353,11 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       copyAddress: '주소 복사',
       howToGetThere: '오시는 길 안내',
       carPark: '주차장',
+      guideEyebrow: '안내',
+      photoBooth: '포토부스',
+      takeHomeFlowers: '답례품',
+      photoBoothText: '소중한 날을 기록할 수 있도록<br>포토부스를 준비했습니다.<br>즐거운 추억으로 간직해주세요!',
+      takeHomeFlowersText: '저희의 하루를 빛내준 꽃들이<br>여러분의 일상에서도<br>피어나길 바랍니다.<br><br>예식에 사용된 꽃들은<br>작은 꽃다발로 준비하여<br>돌아가시는 길에 선물해 드립니다.',
       publicTransport: '대중교통',
       carParkInfo: '도서관 주차장 — 293 Springvale Rd, Glen Waverley VIC 3150\n보공 애비뉴 주차장 — 5 Bogong Ave, Glen Waverley VIC 3150',
       publicTransportInfo: '기차: Glen Waverley 노선을 타고 종점인 Glen Waverley역에서 하차하세요 (Flinders Street역에서 약 40분 소요).\n역에서 호텔까지는 도보로 약 20분, 택시/차량 호출 서비스로는 약 5분 거리입니다.\n버스: Springvale Rd를 지나는 로컬 버스도 호텔 근처에 정차합니다.',
@@ -1545,6 +1592,15 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       });
     });
   }
+
+  document.querySelectorAll('#infoTabs .info-tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('#infoTabs .info-tab').forEach(b=>b.classList.toggle('active', b === tab));
+      document.querySelectorAll('.info-panel').forEach(panel=>{
+        panel.classList.toggle('active', panel.dataset.infoPanel === tab.dataset.info);
+      });
+    });
+  });
 
   window.addEventListener('keydown', e=>{
     if(e.key === 'Escape' && rsvpNoticeModal.classList.contains('open')) closeRsvpNotice();
