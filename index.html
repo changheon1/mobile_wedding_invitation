@@ -706,6 +706,7 @@
   .info-panel.active{ display:block; }
   .info-panel img{
     width:100%; height:auto; display:block; border-radius:8px;
+    aspect-ratio:567/506; object-fit:cover;
     box-shadow:0 8px 20px rgba(0,0,0,.10);
   }
   .info-panel p{ margin-top:22px; font-size:15px; line-height:1.9; color:#454b3d; }
@@ -1041,8 +1042,8 @@ Novotel Melbourne Glen Waverley</div>
         <div class="acc-head"><span data-i18n="groomAccount">Groom — Chris Chung</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
           <div class="acc-row"><span>CBA · BSB: 063097 Account: 83757741</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757741" data-i18n="copy">Copy</button></div>
-          <div class="acc-row"><span>신랑 아버지 · CBA · BSB: 063464 Account: 11119469</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757742" data-i18n="copy">Copy</button></div>
-          <div class="acc-row"><span>신랑 어머니 · (계좌정보 추후 추가)</span></div>
+          <div class="acc-row"><span data-i18n="groomFatherAccount">신랑 아버지 · CBA · BSB: 063464 Account: 11119469</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757742" data-i18n="copy">Copy</button></div>
+          <div class="acc-row"><span data-i18n="groomMotherAccount">신랑 어머니 · (계좌정보 추후 추가)</span></div>
           <div class="acc-row">
             <span>PayPal · @Chris Chung</span>
             <div class="acc-actions">
@@ -1056,8 +1057,8 @@ Novotel Melbourne Glen Waverley</div>
         <div class="acc-head"><span data-i18n="brideAccount">Bride — Claire Lee</span><span class="plus">+</span></div>
         <div class="acc-body"><div class="acc-inner">
           <div class="acc-row"><span>CBA · BSB: 063097 Account: 83757741</span><button class="copy-acc" data-copy="BSB: 063097 Account: 83757741" data-i18n="copy">Copy</button></div>
-          <div class="acc-row"><span>신부측 아버지 · 농협은행 203-12-134532</span><button class="copy-acc" data-copy="농협은행 203-12-134532" data-i18n="copy">Copy</button></div>
-          <div class="acc-row"><span>신부측 어머니 · 신한은행 717-04-097458</span><button class="copy-acc" data-copy="신한은행 717-04-097458" data-i18n="copy">Copy</button></div>
+          <div class="acc-row"><span data-i18n="brideFatherAccount">신부측 아버지 · 농협은행 203-12-134532</span><button class="copy-acc" data-copy="농협은행 203-12-134532" data-i18n="copy">Copy</button></div>
+          <div class="acc-row"><span data-i18n="brideMotherAccount">신부측 어머니 · 신한은행 717-04-097458</span><button class="copy-acc" data-copy="신한은행 717-04-097458" data-i18n="copy">Copy</button></div>
           <div class="acc-row">
             <span>PayPal · @Chris Chung</span>
             <div class="acc-actions">
@@ -1280,6 +1281,10 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       giftIntro: "Your presence on our special day is the greatest gift of all. For those who wish to contribute to our future together, our bank details are included below.",
       groomAccount: 'Groom — Chris Chung',
       brideAccount: 'Bride — Claire Lee',
+      groomFatherAccount: "Groom's Father · CBA · BSB: 063464 Account: 11119469",
+      groomMotherAccount: "Groom's Mother · (Account details to be added)",
+      brideFatherAccount: "Bride's Father · NH Bank 203-12-134532",
+      brideMotherAccount: "Bride's Mother · Shinhan Bank 717-04-097458",
       sendViaPaypal: 'Send via PayPal',
       copyPaypalId: 'Copy PayPal ID',
       copy: 'Copy',
@@ -1396,6 +1401,10 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       giftIntro: '참석해 주시는 것만으로도 큰 선물입니다.<br>마음을 전하고 싶으신 분들을 위해 계좌 정보를 안내드립니다.',
       groomAccount: '신랑 — 정창헌',
       brideAccount: '신부 — 이채현',
+      groomFatherAccount: '신랑 아버지 · CBA · BSB: 063464 Account: 11119469',
+      groomMotherAccount: '신랑 어머니 · (계좌정보 추후 추가)',
+      brideFatherAccount: '신부측 아버지 · 농협은행 203-12-134532',
+      brideMotherAccount: '신부측 어머니 · 신한은행 717-04-097458',
       sendViaPaypal: 'PayPal로 보내기',
       copyPaypalId: 'PayPal ID 복사',
       copy: '복사',
@@ -1904,7 +1913,8 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     submitBtn.textContent = t('post');
     renderGuestbook();
   });
-  applyLanguage('ko');
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
+  applyLanguage(urlLang === 'en' ? 'en' : 'ko');
   renderGuestbook();
 </script>
 </body>
