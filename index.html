@@ -171,9 +171,10 @@
     text-align:center;
     color:var(--white);
     background:
-      linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(8,8,8,0.15) 45%, rgba(5,5,5,0.88) 100%),
-      linear-gradient(160deg, #5a5a5a 0%, #2e2e2e 45%, #141414 100%);
-    aspect-ratio:3/6;
+      linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.45) 100%),
+      url('assets/images/photos/main.jpg') center/cover no-repeat,
+      #141414;
+    aspect-ratio:2535/4032;
   }
   .cover-mark{
     margin-top:auto;
@@ -389,7 +390,7 @@
     overflow:hidden;
     box-shadow:0 10px 24px rgba(0,0,0,.10);
     background:linear-gradient(150deg,#dcd5c4,#b6ad95);
-    aspect-ratio:4/3;
+    aspect-ratio:2969/1979;
   }
   .save-date-photo img{
     width:100%;
@@ -428,14 +429,14 @@
     align-items:center;
     justify-content:center;
     font-size:15px;
-    color:#848b82;
+    color:#7d8f76;
   }
   .save-days .day.active{
     width:34px;
     height:34px;
     border-radius:50%;
     margin:0 auto;
-    background:#000000;
+    background:#7d8f76;
     color:#fff;
   }
 
@@ -479,10 +480,8 @@
     position:relative;
     overflow:hidden;
   }
-  .person .frame::after{
-    content:'';
-    position:absolute; inset:8px;
-    border:1px solid rgba(255,255,255,.5);
+  .person .frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
   }
   .person .role{
     font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--rose); margin-bottom:4px;
@@ -501,33 +500,50 @@
   }
 
   /* ---------- gallery ---------- */
-  .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:6px;
-    margin-top:8px;
-  }
-  .gallery-grid .g{
-    aspect-ratio:1/1;
-    background:linear-gradient(150deg,#e4dcc7,#c3b895);
-    cursor:pointer;
+  .gallery-main{
     position:relative;
-    overflow:hidden;
+    width:76%; margin:24px auto 0;
+    aspect-ratio:3/4;
   }
-  .gallery-grid .g:nth-child(3n+2){ background:linear-gradient(150deg,#d7cdb0,#a6a883); }
-  .gallery-grid .g:nth-child(3n){ background:linear-gradient(150deg,#e9e2cf,#b3ab84); }
+  .gallery-main img{
+    width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;
+  }
+  .gal-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:30px; height:30px; border-radius:50%;
+    border:0; background:rgba(255,255,255,.8); color:#333;
+    font-size:16px; line-height:1; cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,.18);
+    display:flex; align-items:center; justify-content:center; padding:0;
+  }
+  .gal-arrow.prev{ left:-14px; }
+  .gal-arrow.next{ right:-14px; }
+  .gallery-thumbs{
+    display:flex; gap:8px; margin-top:16px;
+    overflow-x:auto; scrollbar-width:none;
+    cursor:grab; user-select:none; -webkit-user-select:none;
+    padding:2px 0;
+  }
+  .gallery-thumbs::-webkit-scrollbar{ display:none; }
+  .gallery-thumbs.dragging{ cursor:grabbing; }
+  .gallery-thumbs img{
+    flex:0 0 auto; width:70px; aspect-ratio:1/1; object-fit:cover;
+    opacity:.55; transition:opacity .2s; -webkit-user-drag:none;
+  }
+  .gallery-thumbs img.active{ opacity:1; }
   .lightbox{
     position:fixed; inset:0; background:rgba(20,24,16,.92);
     display:none; align-items:center; justify-content:center; z-index:50;
   }
   .lightbox.open{ display:flex; }
   .lightbox .box{
-    width:82%; max-width:380px; aspect-ratio:3/4;
-    background:linear-gradient(160deg,#e4dcc7,#8a8a8a);
+    max-width:92%; max-height:88%; object-fit:contain; display:block;
   }
   .lightbox .close{
     position:absolute; top:26px; right:26px; color:#fff; font-size:24px; cursor:pointer; font-family:'ChosunGu';
   }
+  .lightbox .gal-arrow.prev{ left:12px; }
+  .lightbox .gal-arrow.next{ right:12px; }
 
   /* ---------- location ---------- */
   .map-frame{
@@ -809,11 +825,17 @@
 
   /* ---------- ending ---------- */
   .ending{
-    text-align:center; background:var(--forest-dark); color:var(--paper);
-    padding:65px 32px;
+    position:relative; text-align:center; background:var(--forest-dark); color:var(--paper);
+    padding:0; line-height:0;
   }
   .ending .serif{ font-size:24px; font-style:italic; line-height:1.7; margin-bottom:18px; }
-  .ending .sign{ font-family:'Modu','ChosunGu',sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.7; }
+  .ending .sign{
+    position:absolute; top:35%; left:0; right:0; transform:translateY(-50%);
+    padding:0 20px; line-height:1.6;
+    font-family:'Modu','ChosunGu',sans-serif; font-size:14px; letter-spacing:.2em; text-transform:uppercase;
+    color:#fff; text-shadow:0 1px 8px rgba(0,0,0,.55);
+  }
+  .ending img{ display:block; width:100%; aspect-ratio:505/210; object-fit:cover; object-position:center calc(52% - 25px); }
 
   ::selection{ background:var(--gold); color:#fff; }
 </style>
@@ -835,11 +857,6 @@
   <!-- COVER -->
   <section class="cover">
     <div class="cover-mark" data-i18n="coverMark">The Wedding Of</div>
-    <h1 class="cover-names" data-i18n-html="coverNames">
-      Chris Chung
-      <span class="cover-amp">&amp;</span>
-      Claire Lee
-    </h1>
     <div class="cover-date" data-i18n="coverDate">Monday · December 21, 2026 · 6:00 PM</div>
     <div class="scroll-cue" data-i18n-html="scroll">Scroll<span></span></div>
   </section>
@@ -860,17 +877,17 @@
   <section class="reveal">
     <div class="couple-grid" style="margin-top:26px;">
       <div class="person">
-        <div class="frame"></div>
+        <div class="frame"><img src="assets/images/photos/Chris.jpg" alt="Chris Chung"></div>
         <div class="role" data-i18n="groom">Groom</div>
         <div class="name" data-i18n="groomName">Chris Chung</div>
-        <div class="bio" data-i18n-html="groomBio">97년 1월 27일<br><br>커피 · 운동 러버<br>부지런함이 일상인 개발자<br><br>믿음으로 가정을<br>든든히 세우는<br>남편이 되겠습니다</div>
+        <div class="bio" data-i18n-html="groomBio">97년 1월 27일<br><br>커피 · 운동 ♥︎<br>부지런함이 일상인 개발자<br><br>믿음으로 가정을<br>든든히 세우는<br>남편이 되겠습니다</div>
         <div class="note" data-i18n-html="groomNote">Son of<br>Hocheol Chung (정호철) &amp; Yongju Son (손용주)</div>
       </div>
       <div class="person">
-        <div class="frame"></div>
+        <div class="frame"><img src="assets/images/photos/Claire.jpg" alt="Claire Lee"></div>
         <div class="role" data-i18n="bride">Bride</div>
         <div class="name" data-i18n="brideName">Claire Lee</div>
-        <div class="bio" data-i18n-html="brideBio">94년 7월 26일<br><br>요리 · 디저트 러버<br>맛있는 것에 진심인 요리사<br><br>하나님을 바라보며<br>사랑으로 섬기는<br>아내가 되겠습니다</div>
+        <div class="bio" data-i18n-html="brideBio">94년 7월 26일<br><br>요리 · 디저트 ♥︎<br>맛있는 것에 진심인 요리사<br><br>하나님을 바라보며<br>사랑으로 섬기는<br>아내가 되겠습니다</div>
         <div class="note" data-i18n-html="brideNote">Daughter of<br>Yongwoon Lee (이용운) &amp; Eunyoung Choi (최은영)</div>
       </div>
     </div>
@@ -886,7 +903,7 @@
     <div class="save-date-info" data-i18n-html="saveDateInfo">2026년 12월 21일 월요일 오후 6시 00분
 <span class="save-date-venue">Novotel Melbourne Glen Waverley</span></div>
     <div class="save-date-photo">
-      <img id="saveDateImage" alt="Save the date photo" src="" />
+      <img id="saveDateImage" alt="Save the date photo" src="assets/images/photos/save_the_date.png" />
     </div>
     <div class="save-date-calendar">
       <div class="save-month" id="saveMonth">12월</div>
@@ -966,13 +983,19 @@
   <section class="reveal">
     <div class="eyebrow" data-i18n="ourStory">Our Story</div>
     <h2 class="headline" data-i18n="gallery">Gallery</h2>
-    <div class="gallery-grid" id="gallery">
-      <div class="g"></div><div class="g"></div><div class="g"></div>
-      <div class="g"></div><div class="g"></div><div class="g"></div>
-      <div class="g"></div><div class="g"></div><div class="g"></div>
+    <div class="gallery-main" id="galleryMain">
+      <img id="galleryMainImg" alt="Gallery photo" />
+      <button type="button" class="gal-arrow prev" id="galPrev" aria-label="Previous">&#10094;</button>
+      <button type="button" class="gal-arrow next" id="galNext" aria-label="Next">&#10095;</button>
     </div>
+    <div class="gallery-thumbs" id="galleryThumbs"></div>
   </section>
-  <div class="lightbox" id="lightbox"><span class="close" id="lbClose">&times;</span><div class="box"></div></div>
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="lbClose">&times;</span>
+    <button type="button" class="gal-arrow prev" id="lbPrev" aria-label="Previous">&#10094;</button>
+    <img class="box" id="lbImg" alt="Gallery photo" />
+    <button type="button" class="gal-arrow next" id="lbNext" aria-label="Next">&#10095;</button>
+  </div>
 
   <div class="divider reveal">
     <svg width="120" height="18" viewBox="0 0 120 18"><path d="M0 9 H45 M75 9 H120" stroke="#B79556" stroke-width="1"/><circle cx="60" cy="9" r="5" fill="none" stroke="#B79556" stroke-width="1"/></svg>
@@ -1096,6 +1119,7 @@
   <!-- ENDING -->
   <section class="ending">
     <div class="sign" data-i18n="endingSign">Chris &amp; Claire · December 21, 2026 · 6:00 PM</div>
+    <img src="assets/images/photos/save_the_date.png" alt="Save the date" />
   </section>
 
 </div>
@@ -1199,7 +1223,6 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     en: {
       pageTitle: "Chris & Claire - We're Getting Married",
       introMarried: "We're getting<br>Married!",
-      coverNames: 'Chris Chung<span class="cover-amp">&amp;</span>Claire Lee',
       coverDate: 'Monday · December 21, 2026 · 6:00 PM',
       scroll: 'Scroll<span></span>',
       invitation: 'Inviting Our Dear Guests.',
@@ -1228,8 +1251,8 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       brideName: 'Claire Lee',
       groomNote: 'Son of<br>Hocheol Chung & Yongju Son',
       brideNote: 'Daughter of<br>Yongwoon Lee & Eunyoung Choi',
-      groomBio: 'January 27, 1997<br><br>Coffee · Fitness Lover<br>A developer who lives by diligence<br><br>I will be a husband<br>who builds our home<br>firmly on faith',
-      brideBio: 'July 26, 1994<br><br>Cooking · Dessert Lover<br>A chef devoted to delicious food<br><br>I will be a wife<br>who looks to God<br>and serves with love',
+      groomBio: 'January 27, 1997<br><br>Coffee · Fitness ♥︎<br>A developer who lives by diligence<br><br>I will be a husband<br>who builds our home<br>firmly on faith',
+      brideBio: 'July 26, 1994<br><br>Cooking · Dessert ♥︎<br>A chef devoted to delicious food<br><br>I will be a wife<br>who looks to God<br>and serves with love',
       callGroom: 'Call the Groom',
       callBride: 'Call the Bride',
       ourStory: 'Our Story',
@@ -1319,7 +1342,6 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     ko: {
       pageTitle: '창헌 & 채현 - 결혼합니다',
       introMarried: "We're getting<br>Married!",
-      coverNames: '정창헌<span class="cover-amp">&amp;</span>이채현',
       coverDate: '2026년 12월 21일 월요일 · 오후 6:00',
       scroll: '스크롤<span></span>',
       invitation: '소중한 분들을 초대합니다.',
@@ -1348,8 +1370,8 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       brideName: '이채현',
       groomNote: '아버지 정호철<br>어머니 손용주의 아들',
       brideNote: '아버지 이용운<br>어머니 최은영의 딸',
-      groomBio: '97년 1월 27일<br><br>커피 · 운동 러버<br>부지런함이 일상인 개발자<br><br>믿음으로 가정을<br>든든히 세우는<br>남편이 되겠습니다',
-      brideBio: '94년 7월 26일<br><br>요리 · 디저트 러버<br>맛있는 것에 진심인 요리사<br><br>하나님을 바라보며<br>사랑으로 섬기는<br>아내가 되겠습니다',
+      groomBio: '97년 1월 27일<br><br>커피 · 운동 ♥︎<br>부지런함이 일상인 개발자<br><br>믿음으로 가정을<br>든든히 세우는<br>남편이 되겠습니다',
+      brideBio: '94년 7월 26일<br><br>요리 · 디저트 ♥︎<br>맛있는 것에 진심인 요리사<br><br>하나님을 바라보며<br>사랑으로 섬기는<br>아내가 되겠습니다',
       callGroom: '신랑에게 전화',
       callBride: '신부에게 전화',
       ourStory: '우리 이야기',
@@ -1745,12 +1767,64 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   tick(); setInterval(tick,1000);
 
   // gallery lightbox
+  const galleryFiles = ['main.jpg','touch_hair.png','1.png','table_shot.jpg','sofa_shot.jpg','5.jpg','4.png','2.jpg','6.jpg','7.jpg','wedding_ring.jpg'];
+  const galleryMainImg = document.getElementById('galleryMainImg');
+  const galleryThumbs = document.getElementById('galleryThumbs');
   const lightbox = document.getElementById('lightbox');
-  document.getElementById('gallery').addEventListener('click', e=>{
-    if(e.target.classList.contains('g')) lightbox.classList.add('open');
+  const lbImg = document.getElementById('lbImg');
+  let galIndex = 0;
+
+  galleryFiles.forEach((f, i)=>{
+    const img = document.createElement('img');
+    img.src = 'assets/images/photos/' + f;
+    img.alt = 'Gallery thumbnail ' + (i + 1);
+    img.draggable = false;
+    img.addEventListener('click', ()=>{ if(!thumbsMoved) showGallery(i); });
+    galleryThumbs.appendChild(img);
   });
+
+  function showGallery(i){
+    galIndex = (i + galleryFiles.length) % galleryFiles.length;
+    const src = 'assets/images/photos/' + galleryFiles[galIndex];
+    galleryMainImg.src = src;
+    lbImg.src = src;
+    [...galleryThumbs.children].forEach((t, k)=> t.classList.toggle('active', k === galIndex));
+    const t = galleryThumbs.children[galIndex];
+    galleryThumbs.scrollTo({ left: t.offsetLeft - (galleryThumbs.clientWidth - t.offsetWidth) / 2, behavior:'smooth' });
+  }
+
+  // drag-to-scroll thumbnails (touch scrolls natively)
+  let thumbsMoved = false, dragStartX = 0, dragStartScroll = 0, thumbsDown = false;
+  galleryThumbs.addEventListener('mousedown', e=>{
+    thumbsDown = true; thumbsMoved = false;
+    dragStartX = e.pageX; dragStartScroll = galleryThumbs.scrollLeft;
+  });
+  window.addEventListener('mousemove', e=>{
+    if(!thumbsDown) return;
+    const dx = e.pageX - dragStartX;
+    if(Math.abs(dx) > 5){ thumbsMoved = true; galleryThumbs.classList.add('dragging'); }
+    if(thumbsMoved) galleryThumbs.scrollLeft = dragStartScroll - dx;
+  });
+  window.addEventListener('mouseup', ()=>{
+    thumbsDown = false;
+    galleryThumbs.classList.remove('dragging');
+    setTimeout(()=>{ thumbsMoved = false; }, 0);
+  });
+
+  document.getElementById('galPrev').addEventListener('click', ()=>showGallery(galIndex - 1));
+  document.getElementById('galNext').addEventListener('click', ()=>showGallery(galIndex + 1));
+  document.getElementById('lbPrev').addEventListener('click', ()=>showGallery(galIndex - 1));
+  document.getElementById('lbNext').addEventListener('click', ()=>showGallery(galIndex + 1));
+  galleryMainImg.addEventListener('click', ()=>lightbox.classList.add('open'));
   document.getElementById('lbClose').addEventListener('click', ()=>lightbox.classList.remove('open'));
   lightbox.addEventListener('click', e=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', e=>{
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'ArrowLeft') showGallery(galIndex - 1);
+    else if(e.key === 'ArrowRight') showGallery(galIndex + 1);
+    else if(e.key === 'Escape') lightbox.classList.remove('open');
+  });
+  showGallery(0);
 
   // copy address
   document.getElementById('copyAddr').addEventListener('click', ()=>{
