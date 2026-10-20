@@ -8,6 +8,8 @@
 <meta property="og:title" content="Chris &amp; Claire - We're Getting Married" />
 <meta property="og:image" content="https://changheon1.github.io/mobile_wedding_invitation/assets/images/photos/main_preview.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
+<link rel="preload" href="assets/fonts/Yeongwol.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/Modu.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +21,7 @@
         url('assets/fonts/Yeongwol.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
-    font-display:swap;
+    font-display:block;
   }
   @font-face{
     font-family:'Modu';
@@ -27,7 +29,7 @@
         url('assets/fonts/Modu.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
-    font-display:swap;
+    font-display:block;
   }
   :root{
     --paper:#FFFFFF;
@@ -118,9 +120,11 @@
     font-size:51px;
     letter-spacing:.08em;
     text-transform:uppercase;
-    opacity:.85;
+    opacity:0;
     margin-bottom:14px;
-    animation:introRise 1.2s ease;
+  }
+  .intro-overlay.ready .intro-kicker{
+    animation:introRise 1.2s ease forwards;
   }
   .intro-names{
     font-size:38px;
@@ -749,9 +753,11 @@
   .rsvp-modal-panel{
     width:100%;
     max-width:var(--max);
-    min-height:100vh;
+    height:100%;
     background:var(--paper);
     overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
     position:relative;
   }
   .rsvp-modal-close{
@@ -1657,7 +1663,14 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   }, { passive:true });
 
   syncBodyLock();
-  setTimeout(dismissIntro, 2100);
+  // Show the intro text only after its font is ready (1s cap).
+  Promise.race([
+    document.fonts.load("51px 'Yeongwol'"),
+    new Promise(resolve => setTimeout(resolve, 1000))
+  ]).then(()=>{
+    if(introOverlay) introOverlay.classList.add('ready');
+    setTimeout(dismissIntro, 1400);
+  });
 
   // countdown
   const target = new Date('2026-12-21T18:00:00');
@@ -1905,7 +1918,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   renderGuestFields();
 
   // Paste the Google Apps Script web app URL (ends with /exec)
-  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycby-xUxGY8suPmq6kfaW77NVMNvV9K2RObauyFJ2pRT5wAXkJuB5GDAya2B8TNU_elHu/exec';
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzInQj14Qt4EBV8Tu_-6epqbCn6XfM3kB_tfMUlMIkQIIduOgzhtz2fx1vs-AxzO7zm/exec';
 
   async function submitForm(formElement){
     const response = await fetch(FORM_ENDPOINT, {
@@ -1940,9 +1953,10 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     }
   });
 
-  // guestbook
+  // guestbook (loaded from the Google Sheet)
+  let guestbookEntries = [];
   function renderGuestbook(){
-    const list = JSON.parse(localStorage.getItem('guestbook') || '[]');
+    const list = guestbookEntries;
     const el = document.getElementById('gbList');
     if(list.length === 0){
       el.innerHTML = `<div class="gb-empty">${t('guestbookEmpty')}</div>`;
@@ -1959,6 +1973,14 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     const d = document.createElement('div');
     d.textContent = str;
     return d.innerHTML;
+  }
+  async function loadGuestbook(){
+    try{
+      const res = await fetch(FORM_ENDPOINT + '?action=guestbook&t=' + Date.now());
+      const data = await res.json();
+      if(data.result === 'success') guestbookEntries = data.entries;
+    }catch(_err){}
+    renderGuestbook();
   }
   document.getElementById('gbForm').addEventListener('submit', async e=>{
     e.preventDefault();
@@ -1983,19 +2005,17 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
       return;
     }
 
-    const list = JSON.parse(localStorage.getItem('guestbook') || '[]');
-    list.push({name, msg, at:new Date().toISOString()});
-    localStorage.setItem('guestbook', JSON.stringify(list));
     form.reset();
     status.textContent = t('guestbookSubmitSuccess');
     status.style.display = 'block';
     submitBtn.disabled = false;
     submitBtn.textContent = t('post');
-    renderGuestbook();
+    loadGuestbook();
   });
   const urlLang = new URLSearchParams(window.location.search).get('lang');
   applyLanguage(urlLang === 'en' ? 'en' : 'ko');
   renderGuestbook();
+  loadGuestbook();
 </script>
 </body>
 </html>
