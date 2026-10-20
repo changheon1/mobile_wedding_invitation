@@ -1110,9 +1110,7 @@
   <section class="reveal">
     <div class="eyebrow" data-i18n="leaveNote">Leave A Note</div>
     <h2 class="headline" data-i18n="guestbook">Guestbook</h2>
-    <form class="gb-form" id="gbForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="f1585fb5-1a4a-4902-a94b-dd5635e2a536">
-      <input type="hidden" name="subject" value="Wedding Guestbook">
+    <form class="gb-form" id="gbForm">
       <input type="hidden" name="form_type" value="Guestbook">
       <input type="text" id="gbName" name="guest_name" placeholder="Your name" data-i18n-placeholder="yourName" required>
       <textarea id="gbMsg" name="message" rows="3" placeholder="Leave a wish for the couple..." data-i18n-placeholder="guestbookPlaceholder" required></textarea>
@@ -1163,9 +1161,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     <section style="padding-top:36px;">
       <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
       <h2 class="headline" data-i18n="rsvpTitle">RSVP</h2>
-      <form class="rsvp" id="rsvpForm" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="f1585fb5-1a4a-4902-a94b-dd5635e2a536">
-        <input type="hidden" name="subject" value="Wedding RSVP">
+      <form class="rsvp" id="rsvpForm">
         <input type="hidden" name="form_type" value="RSVP">
         <input type="hidden" id="rsvpAttend" name="attending" value="yes">
         <div class="field">
@@ -1908,22 +1904,21 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   rsvpGuests.addEventListener('change', renderGuestFields);
   renderGuestFields();
 
-  const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+  // Paste the Google Apps Script web app URL (ends with /exec)
+  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycby-xUxGY8suPmq6kfaW77NVMNvV9K2RObauyFJ2pRT5wAXkJuB5GDAya2B8TNU_elHu/exec';
 
   async function submitForm(formElement){
-    const formData = new FormData(formElement);
     const response = await fetch(FORM_ENDPOINT, {
       method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
+      body: new FormData(formElement)
     });
     const payload = await response.json().catch(() => ({}));
-    if(!response.ok || !payload.success){
+    if(payload.result !== 'success'){
       throw new Error('Form submission failed');
     }
   }
 
-  // rsvp submit via Web3Forms
+  // rsvp submit to Google Sheets
   document.getElementById('rsvpForm').addEventListener('submit', async e=>{
     e.preventDefault();
     const form = document.getElementById('rsvpForm');
