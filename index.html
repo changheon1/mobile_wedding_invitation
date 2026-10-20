@@ -1110,7 +1110,9 @@
   <section class="reveal">
     <div class="eyebrow" data-i18n="leaveNote">Leave A Note</div>
     <h2 class="headline" data-i18n="guestbook">Guestbook</h2>
-    <form class="gb-form" id="gbForm" action="https://formspree.io/f/xjybyopb" method="POST">
+    <form class="gb-form" id="gbForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="f1585fb5-1a4a-4902-a94b-dd5635e2a536">
+      <input type="hidden" name="subject" value="Wedding Guestbook">
       <input type="hidden" name="form_type" value="Guestbook">
       <input type="text" id="gbName" name="guest_name" placeholder="Your name" data-i18n-placeholder="yourName" required>
       <textarea id="gbMsg" name="message" rows="3" placeholder="Leave a wish for the couple..." data-i18n-placeholder="guestbookPlaceholder" required></textarea>
@@ -1161,7 +1163,9 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     <section style="padding-top:36px;">
       <div class="eyebrow" data-i18n="kindlyReply">Kindly Reply</div>
       <h2 class="headline" data-i18n="rsvpTitle">RSVP</h2>
-      <form class="rsvp" id="rsvpForm" action="https://formspree.io/f/xjybyopb" method="POST">
+      <form class="rsvp" id="rsvpForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="f1585fb5-1a4a-4902-a94b-dd5635e2a536">
+        <input type="hidden" name="subject" value="Wedding RSVP">
         <input type="hidden" name="form_type" value="RSVP">
         <input type="hidden" id="rsvpAttend" name="attending" value="yes">
         <div class="field">
@@ -1904,22 +1908,22 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   rsvpGuests.addEventListener('change', renderGuestFields);
   renderGuestFields();
 
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjybyopb';
+  const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
-  async function submitToFormspree(formElement){
+  async function submitForm(formElement){
     const formData = new FormData(formElement);
-    const response = await fetch(FORMSPREE_ENDPOINT, {
+    const response = await fetch(FORM_ENDPOINT, {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
     });
     const payload = await response.json().catch(() => ({}));
-    if(!response.ok || payload.errors){
+    if(!response.ok || !payload.success){
       throw new Error('Form submission failed');
     }
   }
 
-  // rsvp submit via Formspree
+  // rsvp submit via Web3Forms
   document.getElementById('rsvpForm').addEventListener('submit', async e=>{
     e.preventDefault();
     const form = document.getElementById('rsvpForm');
@@ -1929,7 +1933,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     submitBtn.textContent = t('sendRsvpLoading');
     document.getElementById('rsvpAttend').value = attendVal;
     try{
-      await submitToFormspree(form);
+      await submitForm(form);
       form.style.display = 'none';
       thanks.textContent = t('rsvpSubmitSuccess');
       thanks.classList.add('show');
@@ -1975,7 +1979,7 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
     status.style.display = 'none';
 
     try{
-      await submitToFormspree(form);
+      await submitForm(form);
     }catch(_err){
       status.textContent = t('guestbookSubmitError');
       status.style.display = 'block';
