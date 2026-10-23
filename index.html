@@ -391,6 +391,25 @@
     white-space:pre-line;
   }
   .save-date-venue{ font-size:15px; }
+  .save-date-schedule{
+    margin:26px auto 0;
+    width:88%;
+    max-width:320px;
+    font-family:'Modu','ChosunGu',sans-serif;
+    color:#787f73;
+    font-size:15px;
+    line-height:1.5;
+  }
+  .schedule-row{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:8px 0;
+    border-top:1px solid #e4dccb;
+  }
+  .schedule-row:last-child{ border-bottom:1px solid #e4dccb; }
+  .schedule-time{ color:#B79556; white-space:nowrap; }
+  .schedule-name{ text-align:right; color:#454b3d; }
   .save-date-photo{
     margin:30px auto 0;
     width:88%;
@@ -912,6 +931,11 @@
     <h2 class="save-date-title" data-i18n="saveTheDate">예식 안내</h2>
     <div class="save-date-info" data-i18n-html="saveDateInfo">2026년 12월 21일 월요일 오후 6시 00분
 <span class="save-date-venue">Novotel Melbourne Glen Waverley</span></div>
+    <div class="save-date-schedule">
+      <div class="schedule-row"><span class="schedule-time">6:00 – 7:00 PM</span><span class="schedule-name">Welcome &amp; Fellowship</span></div>
+      <div class="schedule-row"><span class="schedule-time">7:00 – 8:00 PM</span><span class="schedule-name">Wedding Worship Service</span></div>
+      <div class="schedule-row"><span class="schedule-time">8:00 – 10:00 PM</span><span class="schedule-name">Dinner</span></div>
+    </div>
     <div class="save-date-photo">
       <img id="saveDateImage" alt="Save the date photo" src="assets/images/photos/save_the_date.png" />
     </div>
