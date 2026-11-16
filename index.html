@@ -107,10 +107,11 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(20,20,20,.86);
+    background:#141414;
     color:#fff;
-    transition:opacity .7s ease;
+    transition:opacity .7s ease, background-color .7s ease;
   }
+  .intro-overlay.ready{ background:rgba(20,20,20,.86); }
   .intro-overlay.hide{
     opacity:0;
     pointer-events:none;
@@ -124,7 +125,7 @@
     margin-bottom:14px;
   }
   .intro-overlay.ready .intro-kicker{
-    animation:introRise 1.2s ease forwards;
+    animation:introRise .6s ease forwards;
   }
   .intro-names{
     font-size:38px;
@@ -932,9 +933,9 @@
     <div class="save-date-info" data-i18n-html="saveDateInfo">2026년 12월 21일 월요일 오후 6시 00분
 <span class="save-date-venue">Novotel Melbourne Glen Waverley</span></div>
     <div class="save-date-schedule">
-      <div class="schedule-row"><span class="schedule-time">6:00 – 7:00 PM</span><span class="schedule-name">Welcome &amp; Fellowship</span></div>
-      <div class="schedule-row"><span class="schedule-time">7:00 – 8:00 PM</span><span class="schedule-name">Wedding Worship Service</span></div>
-      <div class="schedule-row"><span class="schedule-time">8:00 – 10:00 PM</span><span class="schedule-name">Dinner</span></div>
+      <div class="schedule-row"><span class="schedule-time">6:00 – 6:30 PM</span><span class="schedule-name">Welcome &amp; Fellowship</span></div>
+      <div class="schedule-row"><span class="schedule-time">6:30 – 7:30 PM</span><span class="schedule-name">Wedding Worship Service</span></div>
+      <div class="schedule-row"><span class="schedule-time">7:30 – 9:00 PM</span><span class="schedule-name">Dinner</span></div>
     </div>
     <div class="save-date-photo">
       <img id="saveDateImage" alt="Save the date photo" src="assets/images/photos/save_the_date.png" />
@@ -1687,13 +1688,19 @@ Bus: Local buses running along Springvale Rd also stop near the hotel.</div>
   }, { passive:true });
 
   syncBodyLock();
-  // Show the intro text only after its font is ready (1s cap).
-  Promise.race([
+  // Reveal as soon as fonts and images have loaded; the 2.5s cap only applies on slow connections.
+  const assetsReady = Promise.all([
     document.fonts.load("51px 'Yeongwol'"),
-    new Promise(resolve => setTimeout(resolve, 1000))
-  ]).then(()=>{
+    document.fonts.load("16px 'Modu'"),
+    document.fonts.ready,
+    new Promise(resolve => {
+      if(document.readyState === 'complete') resolve();
+      else window.addEventListener('load', resolve, { once:true });
+    })
+  ]).catch(()=>{});
+  Promise.race([assetsReady, new Promise(resolve => setTimeout(resolve, 2500))]).then(()=>{
     if(introOverlay) introOverlay.classList.add('ready');
-    setTimeout(dismissIntro, 1400);
+    setTimeout(dismissIntro, 900);
   });
 
   // countdown
