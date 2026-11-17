@@ -72,6 +72,23 @@
     color:#5a5f4f;
   }
 
+  /* 긴급 연락처 */
+  .contacts{ list-style:none; }
+  .contacts li{ border-bottom:1px solid var(--paper-soft); }
+  .contacts li:last-child{ border-bottom:none; }
+  .contacts a{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 4px;
+    font-size:15px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .contacts .name{ font-weight:600; }
+  .contacts .num{ color:var(--forest); letter-spacing:.04em; }
+  .contacts .num::before{ content:"\260E\00a0"; }
+
   /* 당일 타임라인 */
   .timeline{ list-style:none; }
   .timeline li{
@@ -123,6 +140,17 @@
   <div class="eyebrow">STAFF ONLY</div>
   <h1 class="page-title">스태프 타임라인</h1>
   <p class="page-sub">2026년 12월 21일 월요일 · 예정</p>
+
+  <section class="panel">
+    <h2>스태프 연락처 <small>(탭하면 전화 연결)</small></h2>
+    <ul class="contacts">
+      <li><a href="tel:0420765589"><span class="name">정창헌</span><span class="num">0420 765 589</span></a></li>
+      <li><a href="tel:0493114665"><span class="name">이채현</span><span class="num">0493 114 665</span></a></li>
+      <li><a href="tel:0468339247"><span class="name">이예은</span><span class="num">0468 339 247</span></a></li>
+      <li><a href="tel:0402199041"><span class="name">진민석</span><span class="num">0402 199 041</span></a></li>
+      <li><a href="tel:0416250034"><span class="name">안소연</span><span class="num">0416 250 034</span></a></li>
+    </ul>
+  </section>
 
   <section class="panel">
     <h2>3. 당일 전체 타임라인 <small>(예정)</small></h2>
