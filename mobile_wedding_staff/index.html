@@ -50,8 +50,26 @@
     font-size:12px;
     color:#8b8574;
     text-align:center;
-    margin-bottom:32px;
+    margin-bottom:20px;
   }
+  .clock{
+    position:sticky;
+    top:0;
+    z-index:10;
+    margin:0 -20px 28px;
+    padding:12px 20px;
+    background:var(--forest);
+    color:#fff;
+    text-align:center;
+  }
+  .clock .label{ font-size:11px; letter-spacing:.12em; opacity:.75; }
+  .clock .time{
+    font-size:28px;
+    font-weight:600;
+    letter-spacing:.06em;
+    font-variant-numeric:tabular-nums;
+  }
+  .clock .date{ font-size:12px; opacity:.85; }
   .panel{
     border:1px solid var(--line);
     border-radius:14px;
@@ -107,9 +125,9 @@
     border-right:1px solid var(--line);
   }
   .timeline .desc{ padding-left:14px; color:#454b3d; }
-  .timeline li.key{ background:var(--highlight); }
-  .timeline li.key .time,
-  .timeline li.key .desc{ font-weight:600; color:var(--forest); }
+  .timeline li.active{ background:var(--forest); }
+  .timeline li.active .time,
+  .timeline li.active .desc{ font-weight:600; color:#fff; }
 
   /* 예배 순서 */
   .service{ width:100%; border-collapse:collapse; }
@@ -130,7 +148,7 @@
   }
   .service td:nth-child(1){ width:30%; white-space:nowrap; }
   .service td:nth-child(2){ width:26%; font-weight:600; color:var(--forest); }
-  .service tr.key td{ background:var(--highlight); font-weight:600; }
+  .service tr.active td{ background:var(--forest); color:#fff; font-weight:600; }
   .service tbody tr:last-child td{ border-bottom:none; }
 </style>
 </head>
@@ -140,6 +158,12 @@
   <div class="eyebrow">STAFF ONLY</div>
   <h1 class="page-title">스태프 타임라인</h1>
   <p class="page-sub">2026년 12월 21일 월요일 · 예정</p>
+
+  <div class="clock" aria-live="off">
+    <div class="label">현재 시간 · 멜버른 (AEDT)</div>
+    <div class="time" id="clockTime">--:--:--</div>
+    <div class="date" id="clockDate"></div>
+  </div>
 
   <section class="panel">
     <h2>스태프 연락처 <small>(탭하면 전화 연결)</small></h2>
@@ -153,7 +177,7 @@
   </section>
 
   <section class="panel">
-    <h2>3. 당일 전체 타임라인 <small>(예정)</small></h2>
+    <h2>당일 전체 타임라인 <small>(예정)</small></h2>
     <ul class="timeline">
       <li><span class="time">12:00 – 15:00</span><span class="desc">신랑·신부 및 가족 헤어·메이크업</span></li>
       <li><span class="time">15:30</span><span class="desc">웨딩 데코레이션 설치 시작 (Saint Valley Studio)</span></li>
@@ -161,14 +185,14 @@
       <li><span class="time">17:30</span><span class="desc">포토부스 설치 (Melbourne Photo Booth Co.)</span></li>
       <li><span class="time">18:00</span><span class="desc">하객 입장 및 안내</span></li>
       <li><span class="time">18:20</span><span class="desc">예배 착석 안내 및 최종 준비</span></li>
-      <li class="key"><span class="time">18:30 – 19:30</span><span class="desc">결혼예배 (Wedding Worship Service)</span></li>
+      <li><span class="time">18:30 – 19:30</span><span class="desc">결혼예배 (Wedding Worship Service)</span></li>
       <li><span class="time">19:30 – 20:30</span><span class="desc">저녁 식사 및 코지 (By Korea)</span></li>
       <li><span class="time">20:30 – 21:00</span><span class="desc">마무리 및 정리</span></li>
     </ul>
   </section>
 
   <section class="panel">
-    <h2>4. 결혼예배 순서 제안 <small>(약 60분)</small></h2>
+    <h2>결혼예배 순서 제안 <small>(약 60분)</small></h2>
     <table class="service">
       <thead>
         <tr><th>시간(예시)</th><th>순서</th><th>세부 내용</th></tr>
@@ -177,7 +201,7 @@
         <tr><td>18:30 – 18:35</td><td>신부 입장</td><td>아버님과 함께 입장, 신랑 앞쪽 대기</td></tr>
         <tr><td>18:35 – 18:40</td><td>예배의 시작</td><td>인사 및 기도 (목사님)</td></tr>
         <tr><td>18:40 – 18:50</td><td>찬양</td><td>찬양 인도 및 회중찬양 (소피 전도사님)</td></tr>
-        <tr class="key"><td>18:50 – 19:10</td><td>말씀</td><td>설교 (약 20분)</td></tr>
+        <tr><td>18:50 – 19:10</td><td>말씀</td><td>설교 (약 20분)</td></tr>
         <tr><td>19:10 – 19:20</td><td>혼인서약 및 반지 교환</td><td>서약 낭독 및 반지 교환</td></tr>
         <tr><td>19:20 – 19:25</td><td>성혼선언</td><td>부부로서의 선언 (목사님)</td></tr>
         <tr><td>19:25 – 19:28</td><td>양가 부모님께 인사</td><td>신랑·신부의 인사</td></tr>
@@ -190,5 +214,57 @@
   </section>
 
 </div>
+
+<script>
+  const TZ = 'Australia/Melbourne';
+  const EVENT_DATE = '2026-12-21';
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', second:'2-digit', hourCycle:'h23'
+  });
+  const weekdays = ['일','월','화','수','목','금','토'];
+
+  // ?now=HH:MM previews the highlight on any day
+  const preview = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get('now') || '');
+
+  const toMin = s => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
+
+  // A slot without an end time lasts until the next slot starts.
+  function parseSlots(rows, timeOf){
+    const slots = rows.map(row => {
+      const [start, end] = timeOf(row).match(/\d{1,2}:\d{2}/g).map(toMin);
+      return { row, start, end };
+    });
+    slots.forEach((s, i) => {
+      if (s.end === undefined) s.end = slots[i + 1] ? slots[i + 1].start : s.start + 1;
+    });
+    return slots;
+  }
+
+  const groups = [
+    parseSlots([...document.querySelectorAll('.timeline li')], r => r.querySelector('.time').textContent),
+    parseSlots([...document.querySelectorAll('.service tbody tr')], r => r.cells[0].textContent)
+  ];
+
+  function tick(){
+    const p = Object.fromEntries(fmt.formatToParts(new Date()).map(x => [x.type, x.value]));
+    const date = `${p.year}-${p.month}-${p.day}`;
+    let hh = p.hour, mm = p.minute;
+    let isEventDay = date === EVENT_DATE;
+    if (preview){ hh = preview[1].padStart(2, '0'); mm = preview[2]; isEventDay = true; }
+
+    const dow = weekdays[new Date(Date.UTC(+p.year, +p.month - 1, +p.day)).getUTCDay()];
+    document.getElementById('clockTime').textContent = preview ? `${hh}:${mm}:00` : `${hh}:${mm}:${p.second}`;
+    document.getElementById('clockDate').textContent =
+      `${p.year}년 ${+p.month}월 ${+p.day}일 (${dow})` + (preview ? ' · 미리보기' : '');
+
+    const now = +hh * 60 + +mm;
+    groups.forEach(slots => slots.forEach(s => {
+      s.row.classList.toggle('active', isEventDay && now >= s.start && now < s.end);
+    }));
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
 </body>
 </html>
